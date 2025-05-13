@@ -23,7 +23,7 @@ public class utils {
     public static boolean validar_cpf(String cpf) {
 
         String cpf_n_formatado = so_numeros(cpf);
-
+        char dig10, dig11;
         int sm = 0, r, num, peso = 10; 
         
         for (byte i= 0; i < 9; i++) {
@@ -34,7 +34,7 @@ public class utils {
             
         r = 11 - (sm % 11);
             
-        char dig10;
+        
         if ((r == 10) || (r == 11)) {
             dig10 = '0';
         }   else {
@@ -44,7 +44,7 @@ public class utils {
         sm = 0;
         peso = 11;
             
-        for(i=0; i<10; i++) {
+        for(byte i=0; i<10; i++) {
             num = (cpf.charAt(i) - 48);
             sm = sm + (num * peso);
             peso = peso - 1;

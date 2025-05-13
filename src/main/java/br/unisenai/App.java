@@ -1,15 +1,13 @@
 package br.unisenai;
 
-/**
- * Hello world!
- *
- */
+import utilitarios.utils;
+
 public class App 
 {
     public static void main( String[] args )
     {
 
-        if (validar_cpf("10212009990")) {
+        if (utils.validar_cpf("10212009991")) {
           
             System.out.println("addawd");
             
