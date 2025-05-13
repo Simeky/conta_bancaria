@@ -7,13 +7,13 @@ public class App
     public static void main( String[] args )
     {
 
-        if (utils.validar_cpf("10212009991")) {
+        if (utils.validar_cpf("")) {
           
-            System.out.println("addawd");
+            System.out.println("Sim");
             
         }   else {
 
-                System.out.println("não");
+                System.out.println("Não");
 
             }
         

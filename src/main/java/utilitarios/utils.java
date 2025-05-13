@@ -24,16 +24,19 @@ public class utils {
 
         String cpf_n_formatado = so_numeros(cpf);
         char dig10, dig11;
-        int sm = 0, r, num, peso = 10; 
+        int sm = 0, r; 
+
+        if (cpf_n_formatado.length() != 11) 
+            return false;        
+
+        if (cpf_n_formatado.chars().distinct().count() == 1)
+            return false;
         
         for (byte i= 0; i < 9; i++) {
-            num = (cpf_n_formatado.charAt(i) - 48);
-            sm = sm + (num * peso);
-            peso = peso - 1;
+            sm += (cpf_n_formatado.charAt(i) - 48) * (10 - i);
         }
             
-        r = 11 - (sm % 11);
-            
+        r = 11 - (sm % 11);            
         
         if ((r == 10) || (r == 11)) {
             dig10 = '0';
@@ -42,12 +45,9 @@ public class utils {
             }
             
         sm = 0;
-        peso = 11;
             
         for(byte i=0; i<10; i++) {
-            num = (cpf.charAt(i) - 48);
-            sm = sm + (num * peso);
-            peso = peso - 1;
+            sm += (cpf_n_formatado.charAt(i) - 48) * (11 - i);
         }
             
         r = 11 - (sm % 11);
@@ -58,7 +58,7 @@ public class utils {
         	    dig11 = (char)(r + 48);
             }
 
-        if ((dig10 == cpf.charAt(9)) && (dig11 == cpf.charAt(10))) {
+        if ((dig10 == cpf_n_formatado.charAt(9)) && (dig11 == cpf_n_formatado.charAt(10))) {
             	return(true);
         }   else {
             	return(false);
