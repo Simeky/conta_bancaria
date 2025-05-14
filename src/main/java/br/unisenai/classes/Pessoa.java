@@ -2,6 +2,8 @@ package br.unisenai.classes;
 
 import java.sql.Date;
 
+import br.unisenai.enums.eSituacao;
+
 public abstract class Pessoa {
 
     private static long ultimo_id = 0;
@@ -12,12 +14,12 @@ public abstract class Pessoa {
     private String pessoa_compl;
     private String pessoa_fone;
     private Date pessoa_cliente_desde;
-    private boolean pessoa_status;
+    private eSituacao pessoa_status;
 
     public Pessoa() {
 
         this.pessoa_id = return_id();
-        this.pessoa_status = true;
+        this.pessoa_status = eSituacao.Ativa;
 
     }
 
@@ -36,7 +38,7 @@ public abstract class Pessoa {
         return pessoa_id;
     }
 
-    public boolean isPessoa_status() {
+    public eSituacao getPessoa_status() {
         return pessoa_status;
     }
 
