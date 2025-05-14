@@ -1,6 +1,6 @@
 package br.unisenai.enums;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -10,7 +10,7 @@ public class eSexoTest {
     public void test()
     {
         
-        assertTrue(true);
+        assertEquals(1,1);
 
     }
 }
