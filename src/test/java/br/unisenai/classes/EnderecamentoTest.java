@@ -7,8 +7,7 @@ import org.junit.Test;
 /**
  * Unit test for Enderecamento functions.
  */
-public class EnderecamentoTest 
-{
+public class EnderecamentoTest {
 
     @Test
     public void test_return_id()

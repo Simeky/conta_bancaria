@@ -7,8 +7,7 @@ import org.junit.Test;
 /**
  * Unit test for Pessoa functions.
  */
-public class PessoaTest 
-{
+public class PessoaTest {
 
     @Test
     public void test_return_id()

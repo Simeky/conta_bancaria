@@ -7,7 +7,7 @@ import org.junit.Test;
 /**
  * Unit test for utils functions.
  */
-public class UtilsTest{
+public class UtilsTest {
 
     @Test
     public void test_so_numeros() {
