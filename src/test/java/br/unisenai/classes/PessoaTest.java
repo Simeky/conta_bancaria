@@ -5,13 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- * Unit test for simple App.
+ * Unit test for Pessoa functions.
  */
 public class PessoaTest 
 {
-    /**
-     * Rigorous Test :-)
-     */
+
     @Test
     public void test_return_id()
     {

@@ -5,13 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- * Unit test for simple App.
+ * Unit test for Enderecamento functions.
  */
 public class EnderecamentoTest 
 {
-    /**
-     * Rigorous Test :-)
-     */
+
     @Test
     public void test_return_id()
     {
