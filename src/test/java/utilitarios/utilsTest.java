@@ -7,8 +7,7 @@ import org.junit.Test;
 /**
  * Unit test for utils functions.
  */
-public class utilsTest 
-{
+public class UtilsTest{
 
     @Test
     public void test_so_numeros() {
@@ -16,8 +15,8 @@ public class utilsTest
         String cpf = "364.733.009-45";
         String cpf_erro = "1a2cadQRE3a.,65=4";
 
-        assertEquals("36473300945", utils.so_numeros(cpf));
-        assertNotEquals("12a3654", utils.so_numeros(cpf_erro));
+        assertEquals("36473300945", Utils.so_numeros(cpf));
+        assertNotEquals("12a3654", Utils.so_numeros(cpf_erro));
 
     }
 
@@ -27,8 +26,8 @@ public class utilsTest
         String cpf = "364.733.009-45";
         String cpf_erro = "1a2cadQRE3a.,65=4";
 
-        assertEquals(true, utils.validar_cpf(cpf));
-        assertNotEquals(true, utils.validar_cpf(cpf_erro));
+        assertEquals(true, Utils.validar_cpf(cpf));
+        assertNotEquals(true, Utils.validar_cpf(cpf_erro));
 
     }
 }

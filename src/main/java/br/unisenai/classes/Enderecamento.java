@@ -21,7 +21,9 @@ public class Enderecamento {
 
         return ++ultimo_id;
 
-    }    
+    }
+    
+    //Getters 'n Setters
 
     public long getEnd_id() {
         return end_id;

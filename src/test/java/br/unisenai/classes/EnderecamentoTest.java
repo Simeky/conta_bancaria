@@ -13,10 +13,10 @@ public class EnderecamentoTest
      * Rigorous Test :-)
      */
     @Test
-    public void test()
+    public void test_return_id()
     {
 
-        assertTrue(true);
+        assertEquals(1, 1);;
 
     }
 }

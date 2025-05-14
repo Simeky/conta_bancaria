@@ -1,6 +1,6 @@
 package utilitarios;
 
-public class utils {
+public class Utils {
 
     public static String so_numeros(String numero_texto){
 

@@ -1,6 +1,6 @@
 package br.unisenai;
 
-import utilitarios.utils;
+import utilitarios.Utils;
 
 public class App 
 {
