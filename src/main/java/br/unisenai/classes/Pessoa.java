@@ -21,6 +21,11 @@ public abstract class Pessoa {
 
     }
 
+    public abstract double sacar();
+    public abstract double depositar();
+    public abstract double pagar_conta();
+    public abstract double emprestimo();
+
     public long return_id(){
         return ++ultimo_id;
     }
