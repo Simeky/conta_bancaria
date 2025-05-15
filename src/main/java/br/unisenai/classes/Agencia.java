@@ -20,6 +20,8 @@ public class Agencia {
 
     }
 
+    //Getters 'n Setters
+
     public long getAgencia_id() {
         return agencia_id;
     }
