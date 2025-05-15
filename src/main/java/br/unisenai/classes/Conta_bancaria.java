@@ -4,7 +4,7 @@ import java.sql.Date;
 
 import br.unisenai.enums.eSituacao;
 
-public class Conta_bancaria {
+public abstract class Conta_bancaria {
 
     private static long ultimo_id = 0;
 
