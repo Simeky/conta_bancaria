@@ -4,6 +4,12 @@ public class Conta_poupanca extends Conta_bancaria{
 
     private double cp_reajuste;
 
+    public Conta_poupanca() {
+
+        super();
+
+    }
+
     public double getCp_reajuste() {
         return cp_reajuste;
     }
