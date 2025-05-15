@@ -21,23 +21,4 @@ public enum eSituacao {
 
     }
 
-    @Override
-    public String toString() {
-
-        switch (valor_status) {
-            
-            case 15:   return "Ativa";
-
-            case 10:   return "Bloqueada";
-
-            case 5:   return "Inativa";
-
-            case 0:   return "Encerrada";
-            
-            default:    throw new IllegalArgumentException("Valor inválido:" + valor_status);
-                
-        }
-
-    }
-
 }

@@ -22,9 +22,4 @@ public enum eSexo {
 
     }
 
-    @Override
-    public String toString() {
-        return this.valor_sexo;
-    }
-
 }
