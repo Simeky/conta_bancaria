@@ -15,6 +15,8 @@ public class Banco {
 
     }
 
+    //Getters 'n Setters
+
     public long getBanco_id() {
         return banco_id;
     }
