@@ -8,6 +8,12 @@ public class Conta_salario extends Conta_bancaria{
     private Date cs_limite_adiantamento;
     private Conta_bancaria cs_conta;
 
+    public Conta_salario() {
+
+        super();
+
+    }
+
     public Pessoa_juridica getCs_empresa() {
         return cs_empresa;
     }
@@ -27,7 +33,7 @@ public class Conta_salario extends Conta_bancaria{
     public Conta_bancaria getCs_conta() {
         return cs_conta;
     }
-    
+
     public void setCs_conta(Conta_bancaria cs_conta) {
         this.cs_conta = cs_conta;
     }
