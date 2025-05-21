@@ -90,8 +90,27 @@ public class UF_controller implements I_uf {
 
     @Override
     public void delete(int id) {
-        
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+
+        final String instruction = "Delete from t_uf where bd_id_uf = ?;";
+        Connection conexao = MySQL.conectar();
+        PreparedStatement command = null;
+
+        try {
+            command = conexao.prepareStatement(instruction);
+            command.setInt(1, id); // Passa diretamente o ID para a query
+
+            if (command.executeUpdate() == 0) {
+                throw new RuntimeException("Nenhuma linha foi deletada. Verifique se o ID existe.");
+            }
+
+        } 
+        catch (SQLException e) {
+            throw new RuntimeException("Problema na exclusão de dados:\n" + e.getMessage());
+        } 
+        finally {
+            MySQL.desconectar(conexao, command);
+        }
+    
     }
 
     @Override
