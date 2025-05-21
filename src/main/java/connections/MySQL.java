@@ -9,7 +9,7 @@ public class MySQL {
     
     public static Connection conectar() {        
         
-        final String url         = "jdbc:mysql://localhost:3306/bd_controle_bancario";
+        final String url         = "jdbc:mysql://localhost:3306/db_controle_bancario";
         final String user        = "root";
         final String password    = "";
 

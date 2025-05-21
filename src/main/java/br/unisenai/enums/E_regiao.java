@@ -2,11 +2,11 @@ package br.unisenai.enums;
 
 public enum E_regiao {
 
-    Norte("N"),
-    Sul("S"),
-    CentroOeste("CO"),
-    Nordeste("NE"),
-    Sudeste("SE");
+    Norte       ("N"),
+    Sul         ("S"),
+    CentroOeste ("CO"),
+    Nordeste    ("NE"),
+    Sudeste     ("SE");
 
 
     private final String valor_regiao;

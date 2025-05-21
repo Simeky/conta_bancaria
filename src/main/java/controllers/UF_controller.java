@@ -64,16 +64,14 @@ public class UF_controller implements I_uf {
 
         try {
             command = conexao.prepareStatement(instruction);
-            command.setString(1, uf.getUf_nome());
-            command.setString(2, uf.getUf_sigla());
-            command.setString(3, uf.getUf_regiao().getValor_regiao());
-            command.setLong(4, uf.getUf_id());
+            command.setString   (1, uf.getUf_nome());
+            command.setString   (2, uf.getUf_sigla());
+            command.setString   (3, uf.getUf_regiao().getValor_regiao());
+            command.setLong     (4, uf.getUf_id());
 
             if (command.executeUpdate() == 0) {
                 throw new RuntimeException("Nenhuma linha foi atualizada. Verifique se o ID existe.");
             }
-
-            command.execute();
 
         } 
         catch (SQLException e) {
@@ -92,7 +90,7 @@ public class UF_controller implements I_uf {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(long id) {
 
         final String instruction = "Delete from t_uf where bd_id_uf = ?;";
         Connection conexao = MySQL.conectar();
@@ -100,7 +98,7 @@ public class UF_controller implements I_uf {
 
         try {
             command = conexao.prepareStatement(instruction);
-            command.setInt(1, id); // Passa diretamente o ID para a query
+            command.setLong(1, id); // Passa diretamente o ID para a query
 
             if (command.executeUpdate() == 0) {
                 throw new RuntimeException("Nenhuma linha foi deletada. Verifique se o ID existe.");

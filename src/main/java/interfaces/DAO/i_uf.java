@@ -10,7 +10,7 @@ public interface I_uf {
     void insert(UF uf);
     void update(UF uf);
     void save(UF uf);
-    void delete(int id);
+    void delete(long id);
     void delete(UF uf);
 
 }
