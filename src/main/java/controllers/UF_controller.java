@@ -42,7 +42,10 @@ public class UF_controller implements I_uf {
             command.setString(1, uf.getUf_nome());
             command.setString(2, uf.getUf_sigla());
             command.setString(3, uf.getUf_regiao().getValor_regiao());
-            command.execute();
+            
+            if (command.executeUpdate() == 0) {
+                throw new RuntimeException("Nenhum registro foi adicionado. Verifique se não inseriu nenhum valor inválido");
+            }
         }   
         catch (SQLException e) {
             throw new RuntimeException("Problema na inserção de dados:\n" + e.getMessage());
@@ -64,7 +67,7 @@ public class UF_controller implements I_uf {
             command.setString(1, uf.getUf_nome());
             command.setString(2, uf.getUf_sigla());
             command.setString(3, uf.getUf_regiao().getValor_regiao());
-            command.setInt(4, uf.getUf_id());
+            command.setLong(4, uf.getUf_id());
 
             if (command.executeUpdate() == 0) {
                 throw new RuntimeException("Nenhuma linha foi atualizada. Verifique se o ID existe.");
