@@ -55,7 +55,7 @@ public class UF_controller implements I_uf {
     @Override
     public void update(UF uf) {
 
-        final String instruction = "UPDATE t_uf SET bd_nome_uf = ?, bd_sigla_uf = ?, bd_regiao_uf = ? WHERE bd_id_uf = ?;";
+        final String instruction = "Update t_uf set bd_nome_uf = ?, bd_sigla_uf = ?, bd_regiao_uf = ? where bd_id_uf = ?;";
         Connection conexao = MySQL.conectar();
         PreparedStatement command = null;
 
