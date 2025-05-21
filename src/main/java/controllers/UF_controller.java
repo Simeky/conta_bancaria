@@ -48,19 +48,38 @@ public class UF_controller implements I_uf {
             throw new RuntimeException("Problema na inserção de dados:\n" + e.getMessage());
         }
         finally {
-
-            MySQL.desconectar(conexao, command);
-            
+            MySQL.desconectar(conexao, command);            
         }
-
-
-
     }
 
     @Override
     public void update(UF uf) {
+
+        final String instruction = "UPDATE t_uf SET bd_nome_uf = ?, bd_sigla_uf = ?, bd_regiao_uf = ? WHERE bd_id_uf = ?;";
+        Connection conexao = MySQL.conectar();
+        PreparedStatement command = null;
+
+        try {
+            command = conexao.prepareStatement(instruction);
+            command.setString(1, uf.getUf_nome());
+            command.setString(2, uf.getUf_sigla());
+            command.setString(3, uf.getUf_regiao().getValor_regiao());
+            command.setInt(4, uf.getUf_id());
+
+            if (command.executeUpdate() == 0) {
+                throw new RuntimeException("Nenhuma linha foi atualizada. Verifique se o ID existe.");
+            }
+
+            command.execute();
+
+        } 
+        catch (SQLException e) {
+            throw new RuntimeException("Problema na atualização de dados:\n" + e.getMessage());
+        } 
+        finally {
+            MySQL.desconectar(conexao, command);
+        }
         
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
 
     @Override
