@@ -98,7 +98,7 @@ public class UF_controller implements I_uf {
 
         try {
             command = conexao.prepareStatement(instruction);
-            command.setLong(1, id); // Passa diretamente o ID para a query
+            command.setLong(1, id);
 
             if (command.executeUpdate() == 0) {
                 throw new RuntimeException("Nenhuma linha foi deletada. Verifique se o ID existe.");
