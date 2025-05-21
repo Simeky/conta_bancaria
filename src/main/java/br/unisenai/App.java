@@ -48,7 +48,5 @@ public class App
         ufc.update(uf);
         ufc.delete(uf5.getUf_id());
 
-        System.out.println(uf.getUf_id() + " | " + uf2.getUf_id());
-
     }
 }
