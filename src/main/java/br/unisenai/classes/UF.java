@@ -4,8 +4,6 @@ import br.unisenai.enums.E_regiao;
 
 public class UF {
 
-    private static long ultimo_id = 0;
-
     private long uf_id;
     private String uf_nome;
     private String uf_sigla;
@@ -13,20 +11,20 @@ public class UF {
 
     public UF() {
 
-        this.uf_id = return_id();
-
     }
 
-    public long return_id() {
-
-        return ++ultimo_id;
-
+    public UF(long uf_id, String uf_nome, String uf_sigla, E_regiao uf_regiao) {
+        
     }
+
 
     //Getters 'n Setters
 
     public long getUf_id() {
         return this.uf_id;
+    }
+    public void setUf_id(long uf_id) {
+        this.uf_id = uf_id;
     }
     public String getUf_nome() {
         return uf_nome;

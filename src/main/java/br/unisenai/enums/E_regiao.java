@@ -17,7 +17,7 @@ public enum E_regiao {
 
     }
 
-     public String getValor_regiao() {
+    public String getValor_regiao() {
 
         return this.valor_regiao;
 
