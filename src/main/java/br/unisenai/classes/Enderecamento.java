@@ -8,8 +8,6 @@ public class Enderecamento {
     private String end_municipio;
     private String end_uf;
     private String end_cep;
-    private String end_num;
-    private String end_complemento;
 
     public Enderecamento() {}
     
@@ -29,22 +27,6 @@ public class Enderecamento {
 
     public String getEnd_cep() {
         return end_cep;
-    }
-
-    public String getEnd_num() {
-        return end_num;
-    }
-
-    public void setEnd_num(String end_num) {
-        this.end_num = end_num;
-    }
-
-    public String getEnd_complemento() {
-        return end_complemento;
-    }
-
-    public void setEnd_complemento(String end_complemento) {
-        this.end_complemento = end_complemento;
     }
 
     public String getEnd_logradouro() {
