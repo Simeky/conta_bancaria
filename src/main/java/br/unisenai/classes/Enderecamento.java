@@ -2,8 +2,6 @@ package br.unisenai.classes;
 
 public class Enderecamento {
 
-    private static long ultimo_id = 0;
-
     private long end_id;
     private String end_logradouro;
     private String end_bairro;
@@ -11,22 +9,20 @@ public class Enderecamento {
     private String end_uf;
     private String end_cep;
 
-    public Enderecamento() {
-
-        this.end_id = return_id();
-
-    }
-
-    public long return_id(){
-
-        return ++ultimo_id;
-
-    }
+    public Enderecamento() {}
     
     //Getters 'n Setters
 
     public long getEnd_id() {
         return end_id;
+    }
+
+    public void setEnd_id(long end_id) {
+        this.end_id = end_id;
+    }
+
+    public void setEnd_cep(String end_cep) {
+        this.end_cep = end_cep;
     }
 
     public String getEnd_cep() {

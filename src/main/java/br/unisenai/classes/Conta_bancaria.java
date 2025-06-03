@@ -6,8 +6,6 @@ import br.unisenai.enums.eSituacao;
 
 public abstract class Conta_bancaria {
 
-    private static long ultimo_id = 0;
-
     private long cb_id;
     private Agencia cb_agencia;
     private Pessoa cb_titular1;
@@ -23,21 +21,19 @@ public abstract class Conta_bancaria {
 
     public Conta_bancaria(){
 
-        this.cb_id = return_id();
         setCb_status(eSituacao.Ativa);
 
     }
 
-    public long return_id() {
-
-        return ++ultimo_id;
-
-    }
 
     //Getters 'n Setters
 
     public long getCb_id() {
         return cb_id;
+    }
+
+    public void setCb_id(long cb_id) {
+        this.cb_id = cb_id;
     }
 
     public Agencia getCb_agencia() {

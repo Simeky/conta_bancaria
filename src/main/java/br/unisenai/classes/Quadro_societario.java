@@ -2,27 +2,22 @@ package br.unisenai.classes;
 
 public class Quadro_societario {
 
-    private static long ultimo_id = 0;
-
     private long qua_id;
     private Pessoa_juridica qua_empresa;
     private Pessoa qua_socio;
     private double qua_perc; // %
 
-    public Quadro_societario() {
+    public Quadro_societario() {}
 
-        this.qua_id = return_id();
 
-    }
-
-    public long return_id() {
-
-        return ++ultimo_id;
-
-    }
+    //Getters 'n Setters
 
     public long getQua_id() {
         return qua_id;
+    }
+
+    public void setQua_id(long qua_id) {
+        this.qua_id = qua_id;
     }
 
     public Pessoa_juridica getQua_empresa() {

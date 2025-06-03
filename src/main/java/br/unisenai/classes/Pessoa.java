@@ -6,8 +6,6 @@ import br.unisenai.enums.eSituacao;
 
 public abstract class Pessoa {
 
-    private static long ultimo_id = 0;
-
     private long pessoa_id;
     private Enderecamento pessoa_end;
     private int pessoa_num_end;
@@ -18,7 +16,6 @@ public abstract class Pessoa {
 
     public Pessoa() {
 
-        this.pessoa_id = return_id();
         this.pessoa_status = eSituacao.Ativa;
 
     }
@@ -28,14 +25,19 @@ public abstract class Pessoa {
     public abstract double pagar_conta();
     public abstract double emprestimo();
 
-    public long return_id(){
-        return ++ultimo_id;
-    }
 
     //Getters 'n Setters
 
     public long getPessoa_id() {
         return pessoa_id;
+    }
+
+    public void setPessoa_id(long pessoa_id) {
+        this.pessoa_id = pessoa_id;
+    }
+
+    public void setPessoa_status(eSituacao pessoa_status) {
+        this.pessoa_status = pessoa_status;
     }
 
     public eSituacao getPessoa_status() {

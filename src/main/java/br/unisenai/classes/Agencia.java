@@ -4,8 +4,6 @@ import br.unisenai.enums.eSituacao;
 
 public class Agencia {
 
-    private static long ultimo_id = 0;
-
     private long agencia_id;
     private Banco agencia_banco;
     private Enderecamento agencia_end;
@@ -14,16 +12,16 @@ public class Agencia {
     private String agencia_fone;
     private eSituacao agencia_status;
 
-    public long return_id() {
-
-        return ++ultimo_id;
-
-    }
+    public Agencia(){}
 
     //Getters 'n Setters
 
     public long getAgencia_id() {
         return agencia_id;
+    }
+    
+    public void setAgencia_id(long agencia_id) {
+        this.agencia_id = agencia_id;
     }
 
     public Banco getAgencia_banco() {

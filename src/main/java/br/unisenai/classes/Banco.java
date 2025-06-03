@@ -2,18 +2,12 @@ package br.unisenai.classes;
 
 public class Banco {
 
-    private static long ultimo_id = 0;
-
     private long banco_id;
     private String banco_cod_inst;
     private String banco_nome;
     private String banco_mascara_cb;
 
-    public long return_id() {
-
-        return ++ultimo_id;
-
-    }
+    public Banco(){}
 
     //Getters 'n Setters
 
@@ -21,6 +15,10 @@ public class Banco {
         return banco_id;
     }
 
+    public void setBanco_id(long banco_id) {
+        this.banco_id = banco_id;
+    }
+    
     public String getBanco_cod_inst() {
         return banco_cod_inst;
     }
