@@ -1,20 +1,20 @@
 /*
 	Drops
 */
--- Drop table conta_salario;
--- Drop table conta_poupanca;
--- Drop table conta_especial;
--- Drop table conta_corrente;
--- Drop table t_conta_bancaria;
--- Drop table t_pessoa_juridica;
--- Drop table t_quadro_societario;
--- Drop table t_pessoa_fisica;
--- Drop table t_pessoa;
--- Drop table t_agencia;
--- Drop table t_endereco;
--- Drop table t_banco;
+Drop table conta_salario;
+Drop table conta_poupanca;
+Drop table conta_especial;
+Drop table conta_corrente;
+Drop table t_conta_bancaria;
+Drop table t_pessoa_juridica;
+Drop table t_quadro_societario;
+Drop table t_pessoa_fisica;
+Drop table t_pessoa;
+Drop table t_agencia;
+Drop table t_endereco;
+Drop table t_banco;
 
--- Drop database db_controle_bancario;
+Drop database db_controle_bancario;
 
 /* 
 	Database
