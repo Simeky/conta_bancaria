@@ -2,8 +2,6 @@ package br.unisenai.classes;
 
 import java.sql.Date;
 
-import br.unisenai.enums.eStatus;
-
 public abstract class Pessoa {
 
     private long pessoa_id;
@@ -12,11 +10,11 @@ public abstract class Pessoa {
     private String pessoa_compl;
     private String pessoa_fone;
     private Date pessoa_cliente_desde;
-    private eStatus pessoa_status;
+    private Boolean pessoa_status;
 
     public Pessoa() {
 
-        this.pessoa_status = eStatus.Ativa;
+       
 
     }
 
@@ -34,14 +32,6 @@ public abstract class Pessoa {
 
     public void setPessoa_id(long pessoa_id) {
         this.pessoa_id = pessoa_id;
-    }
-
-    public void setPessoa_status(eStatus pessoa_status) {
-        this.pessoa_status = pessoa_status;
-    }
-
-    public eStatus getPessoa_status() {
-        return pessoa_status;
     }
 
     public Enderecamento getPessoa_end() {
@@ -82,6 +72,14 @@ public abstract class Pessoa {
 
     public void setPessoa_cliente_desde(Date pessoa_cliente_desde) {
         this.pessoa_cliente_desde = pessoa_cliente_desde;
+    }
+
+    public Boolean getPessoa_status() {
+        return pessoa_status;
+    }
+
+    public void setPessoa_status(Boolean pessoa_status) {
+        this.pessoa_status = pessoa_status;
     }
 
 }

@@ -120,8 +120,8 @@ public abstract class Conta_bancaria {
         return cb_status;
     }
 
-    public void setCb_status(eStatus status) {
-        this.cb_status = status;
-    }
+    public void setCb_status(eStatus cb_status) {
+        this.cb_status = cb_status;
+    }       
 
 }
