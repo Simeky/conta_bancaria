@@ -1,6 +1,6 @@
 package br.unisenai.classes;
 
-import br.unisenai.enums.eSituacao;
+import br.unisenai.enums.eStatus;
 
 public class Agencia {
 
@@ -10,7 +10,7 @@ public class Agencia {
     private int agencia_num_end;
     private String agencia_compl;
     private String agencia_fone;
-    private eSituacao agencia_status;
+    private eStatus agencia_status;
 
     public Agencia(){}
 
@@ -64,11 +64,11 @@ public class Agencia {
         this.agencia_fone = agencia_fone;
     }
 
-    public eSituacao getAgencia_status() {
+    public eStatus getAgencia_status() {
         return agencia_status;
     }
 
-    public void setAgencia_status(eSituacao agencia_status) {
+    public void setAgencia_status(eStatus agencia_status) {
         this.agencia_status = agencia_status;
     }
 

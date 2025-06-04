@@ -2,7 +2,7 @@ package br.unisenai.classes;
 
 import java.sql.Date;
 
-import br.unisenai.enums.eSituacao;
+import br.unisenai.enums.eStatus;
 
 public abstract class Conta_bancaria {
 
@@ -17,11 +17,11 @@ public abstract class Conta_bancaria {
     private String cb_num_card;
     private Date cb_val_card;
     private short cb_cvv_card;
-    private eSituacao cb_status;
+    private eStatus cb_status;
 
     public Conta_bancaria(){
 
-        setCb_status(eSituacao.Ativa);
+        setCb_status(eStatus.Ativa);
 
     }
 
@@ -116,11 +116,11 @@ public abstract class Conta_bancaria {
         this.cb_cvv_card = cb_cvv_card;
     }
 
-    public eSituacao getCb_status() {
+    public eStatus getCb_status() {
         return cb_status;
     }
 
-    public void setCb_status(eSituacao status) {
+    public void setCb_status(eStatus status) {
         this.cb_status = status;
     }
 
