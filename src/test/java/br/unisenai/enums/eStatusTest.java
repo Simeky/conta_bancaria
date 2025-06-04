@@ -2,7 +2,7 @@ package br.unisenai.enums;
 
 import org.junit.Test;
 
-public class eSexoTest {
+public class eStatusTest {
     @Test
     public void testGetValue() {
 

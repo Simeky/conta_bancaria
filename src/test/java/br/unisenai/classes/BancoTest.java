@@ -1,19 +1,45 @@
 package br.unisenai.classes;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
-/**
- * Unit test for Banco functions.
- */
 public class BancoTest {
+    @Test
+    public void testGetBanco_cod_inst() {
+
+    }
 
     @Test
-    public void test_return_id()
-    {
+    public void testGetBanco_id() {
 
-        assertEquals(1, 1);;
+    }
+
+    @Test
+    public void testGetBanco_mascara_cb() {
+
+    }
+
+    @Test
+    public void testGetBanco_nome() {
+
+    }
+
+    @Test
+    public void testSetBanco_cod_inst() {
+
+    }
+
+    @Test
+    public void testSetBanco_id() {
+
+    }
+
+    @Test
+    public void testSetBanco_mascara_cb() {
+
+    }
+
+    @Test
+    public void testSetBanco_nome() {
 
     }
 }

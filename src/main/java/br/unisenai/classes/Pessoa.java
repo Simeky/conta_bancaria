@@ -14,14 +14,9 @@ public abstract class Pessoa {
 
     public Pessoa() {
 
-       
+       setPessoa_status(true);
 
     }
-
-    public abstract double sacar();
-    public abstract double depositar();
-    public abstract double pagar_conta();
-    public abstract double emprestimo();
 
 
     //Getters 'n Setters

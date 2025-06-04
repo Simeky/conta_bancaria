@@ -1,19 +1,35 @@
 package br.unisenai.classes;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
-/**
- * Unit test for Conta_salario functions.
- */
 public class Conta_salarioTest {
+    @Test
+    public void testGetCs_conta() {
+
+    }
 
     @Test
-    public void test_return_id()
-    {
+    public void testGetCs_empresa() {
 
-        assertEquals(1, 1);;
+    }
+
+    @Test
+    public void testGetCs_limite_adiantamento() {
+
+    }
+
+    @Test
+    public void testSetCs_conta() {
+
+    }
+
+    @Test
+    public void testSetCs_empresa() {
+
+    }
+
+    @Test
+    public void testSetCs_limite_adiantamento() {
 
     }
 }

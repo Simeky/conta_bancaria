@@ -1,19 +1,65 @@
 package br.unisenai.classes;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
-/**
- * Unit test for Enderecamento functions.
- */
 public class EnderecamentoTest {
+    @Test
+    public void testGetEnd_bairro() {
+
+    }
 
     @Test
-    public void test_return_id()
-    {
+    public void testGetEnd_cep() {
 
-        assertEquals(1, 1);;
+    }
+
+    @Test
+    public void testGetEnd_id() {
+
+    }
+
+    @Test
+    public void testGetEnd_logradouro() {
+
+    }
+
+    @Test
+    public void testGetEnd_municipio() {
+
+    }
+
+    @Test
+    public void testGetEnd_uf() {
+
+    }
+
+    @Test
+    public void testSetEnd_bairro() {
+
+    }
+
+    @Test
+    public void testSetEnd_cep() {
+
+    }
+
+    @Test
+    public void testSetEnd_id() {
+
+    }
+
+    @Test
+    public void testSetEnd_logradouro() {
+
+    }
+
+    @Test
+    public void testSetEnd_municipio() {
+
+    }
+
+    @Test
+    public void testSetEnd_uf() {
 
     }
 }

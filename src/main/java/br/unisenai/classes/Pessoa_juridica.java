@@ -11,29 +11,13 @@ public class Pessoa_juridica extends Pessoa{
     private Quadro_societario pj_quadro_socio;
     private double pj_capital_social;
 
-    @Override
-    public double sacar() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'sacar'");
+    public Pessoa_juridica() {
+
+        super();
+
     }
 
-    @Override
-    public double depositar() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'depositar'");
-    }
-
-    @Override
-    public double pagar_conta() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'pagar_conta'");
-    }
-
-    @Override
-    public double emprestimo() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'emprestimo'");
-    }
+    //Getters 'n Setters
 
     public String getPj_cnpj() {
         return pj_cnpj;

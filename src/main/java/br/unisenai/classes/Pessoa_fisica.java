@@ -19,29 +19,7 @@ public class Pessoa_fisica extends Pessoa{
 
     }
 
-    @Override
-    public double sacar() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'sacar'");
-    }
-
-    @Override
-    public double depositar() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'depositar'");
-    }
-
-    @Override
-    public double pagar_conta() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'pagar_conta'");
-    }
-
-    @Override
-    public double emprestimo() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'emprestimo'");
-    }
+    //Getters 'n Setters
 
     public String getPf_cpf() {
         return pf_cpf;

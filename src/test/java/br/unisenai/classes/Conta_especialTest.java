@@ -1,19 +1,25 @@
 package br.unisenai.classes;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
-/**
- * Unit test for Conta_especial functions.
- */
 public class Conta_especialTest {
+    @Test
+    public void testGetCe_limite_cred() {
+
+    }
 
     @Test
-    public void test_return_id()
-    {
+    public void testGetCe_vencimento_cred() {
 
-        assertEquals(1, 1);;
+    }
+
+    @Test
+    public void testSetCe_limite_cred() {
+
+    }
+
+    @Test
+    public void testSetCe_vencimento_cred() {
 
     }
 }
