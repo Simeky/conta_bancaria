@@ -46,9 +46,36 @@ public class banco_controller implements iBancoDAO{
     }
 
     @Override
-    public Banco find_banco(String t) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'find_banco'");
+    public Banco find_banco(String nome) {
+        final String intruction =   "Select ban.bd_id_banco, ban.bd_cod_instituicao_banco, ban.bd_nome_banco, ban.bd_mascara_conta_banco "  + 
+                                    "From t_banco ban " +  
+                                    "Where ban.bd_nome_banco = ?;";
+        Connection conexao = MySQL.conectar();
+        PreparedStatement command = null;
+        ResultSet dados = null;
+        Banco ban = null;
+
+        try {
+            command = conexao.prepareStatement(intruction);
+            command.setString(1, nome);
+            dados = command.executeQuery();
+
+            if (dados.next()) {
+               ban = new Banco();
+               ban.setBanco_id(dados.getLong(0));
+               ban.setBanco_cod_inst(dados.getString(1));
+               ban.setBanco_nome(dados.getString(2));
+               ban.setBanco_mascara_cb(dados.getString(3));
+            }
+        }   
+        catch (SQLException e) {
+            throw new RuntimeException("Problema no retorno dos dados:\n" + e.getMessage());
+        }
+        finally {
+            MySQL.desconectar(conexao, command);            
+        }
+
+        return ban;
     }
 
     @Override
