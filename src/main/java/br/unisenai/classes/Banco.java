@@ -9,6 +9,8 @@ public class Banco {
 
     public Banco(){}
 
+    public Banco(long banco_id, String banco_cod_inst, String banco_nome, String banco_mascara_cb) {}
+
     //Getters 'n Setters
 
     public long getBanco_id() {
