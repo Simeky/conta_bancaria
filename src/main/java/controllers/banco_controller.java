@@ -124,8 +124,27 @@ public class banco_controller implements iBancoDAO{
 
     @Override
     public void insert(Banco ban) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'insert'");
+        final String intruction = "Insert into t_banco (bd_cod_instituicao_banco, bd_nome_banco, bd_mascara_conta_banco)" +
+                                 " Values (?, ?, ?);";
+        Connection conexao = MySQL.conectar();
+        PreparedStatement command = null;
+
+        try {
+            command = conexao.prepareStatement(intruction);
+            command.setString(1, ban.getBanco_cod_inst());
+            command.setString(2, ban.getBanco_nome());
+            command.setString(3, ban.getBanco_mascara_cb());
+            
+            if (command.executeUpdate() == 0) {
+                throw new RuntimeException("Nenhum registro foi adicionado. Verifique se não inseriu nenhum valor inválido");
+            }
+        }   
+        catch (SQLException e) {
+            throw new RuntimeException("Problema na inserção de dados:\n" + e.getMessage());
+        }
+        finally {
+            MySQL.desconectar(conexao, command);            
+        }
     }
 
     @Override
