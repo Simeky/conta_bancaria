@@ -15,7 +15,10 @@ public class banco_controller implements iBancoDAO{
 
     @Override
     public Banco find_banco(long id) {
-        final String intruction =   "Select ban.bd_id_banco, ban.bd_cod_instituicao_banco, ban.bd_nome_banco, ban.bd_mascara_conta_banco "  + 
+        final String intruction =   "Select  ban.bd_id_banco, " + 
+                                            "ban.bd_cod_instituicao_banco, " + 
+                                            "ban.bd_nome_banco, " + 
+                                            "ban.bd_mascara_conta_banco "  + 
                                     "From t_banco ban " +  
                                     "Where ban.bd_id_banco = ?;";
         Connection conexao = MySQL.conectar();
@@ -48,7 +51,10 @@ public class banco_controller implements iBancoDAO{
 
     @Override
     public Banco find_banco(String nome) {
-        final String intruction =   "Select ban.bd_id_banco, ban.bd_cod_instituicao_banco, ban.bd_nome_banco, ban.bd_mascara_conta_banco "  + 
+        final String intruction =   "Select  ban.bd_id_banco, " +
+                                            "ban.bd_cod_instituicao_banco, " + 
+                                            "ban.bd_nome_banco, " + 
+                                            "ban.bd_mascara_conta_banco "  + 
                                     "From t_banco ban " +  
                                     "Where ban.bd_nome_banco = ?;";
         Connection conexao = MySQL.conectar();
@@ -81,9 +87,12 @@ public class banco_controller implements iBancoDAO{
 
     @Override
     public List<Banco> find_all(String condicao, String ordem) {
-        final String intruction =   "Select uf.bd_id_uf, uf.bd_nome_uf, uf.bd_sigla_uf, uf.bd_regiao_uf"  + 
-                                    "from t_uf uf;";
-        String Condicao   =         "where ?";
+        final String intruction =   "Select  ban.bd_id_banco, " + 
+                                            "ban.bd_cod_instituicao_banco, " + 
+                                            "ban.bd_nome_banco, " + 
+                                            "ban.bd_mascara_conta_banco "  + 
+                                    "from t_banco ban ";
+        String Condicao   =         "where ? ";
         String Ordem      =         "Order by ?";
 
         Connection conexao = MySQL.conectar();
