@@ -183,8 +183,13 @@ public class banco_controller implements iBancoDAO{
 
     @Override
     public void save(Banco ban) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
+        if (ban.getBanco_id() == 0) {
+            // Se o ID for zero, insere um novo registro
+            insert(ban);
+        } else {
+            // Se o ID já existe, atualiza o registro
+            update(ban);
+        }
     }
 
     @Override
