@@ -7,12 +7,9 @@ import br.unisenai.classes.Endereco;
 public interface iEnderecoDAO {
 
     Endereco find_endereco(long id);
-    Endereco find_endereco(String t);
     List<Endereco> find_all(String condicao, String ordem);
     void insert(Endereco end);
     void update(Endereco end);
     void save(Endereco end);
     void delete(long id);
-    void delete(Endereco end);
-
 }

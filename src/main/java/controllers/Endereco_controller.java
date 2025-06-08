@@ -128,12 +128,18 @@ public class Endereco_controller implements iEnderecoDAO {
 
     @Override
     public void update(Endereco end) {
-        String sql = "UPDATE t_endereco SET bd_cep_end = ?, bd_uf_sigla_end = ?, bd_municipio_end = ?, bd_bairro_end = ?, bd_logradouro_end = ? WHERE bd_id_end = ?;";
+        StringBuilder sql = new StringBuilder(
+            "Update t_endereco set   bd_cep_end = ?, " + 
+                                    "bd_uf_sigla_end = ?, " + 
+                                    "bd_municipio_end = ?, " + 
+                                    "bd_bairro_end = ?, " + 
+                                    "bd_logradouro_end = ? " + 
+            "Where bd_id_end = ?;");
         Connection conexao = MySQL.conectar();
         PreparedStatement command = null;
 
         try {
-            command = conexao.prepareStatement(sql);
+            command = conexao.prepareStatement(sql.toString());
             command.setString(1, end.getEnd_cep());
             command.setString(2, end.getEnd_uf());
             command.setString(3, end.getEnd_municipio());
@@ -161,11 +167,13 @@ public class Endereco_controller implements iEnderecoDAO {
 
     @Override
     public void delete(long id) {
-        String sql = "DELETE FROM t_endereco WHERE bd_id_end = ?;";
+        StringBuilder sql = new StringBuilder(
+            "Delete from t_endereco " + 
+            "Where bd_id_end = ?;");
         Connection conexao = MySQL.conectar();
         PreparedStatement command = null;
         try {
-            command = conexao.prepareStatement(sql);
+            command = conexao.prepareStatement(sql.toString());
             command.setLong(1, id);
 
             if (command.executeUpdate() == 0) {
@@ -178,15 +186,4 @@ public class Endereco_controller implements iEnderecoDAO {
         }
     }
 
-    @Override
-    public Endereco find_endereco(String t) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'find_endereco'");
-    }
-
-    @Override
-    public void delete(Endereco end) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
-    }
 }
