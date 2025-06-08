@@ -210,10 +210,4 @@ public class banco_controller implements iBancoDAO{
 
     }
 
-    @Override
-    public void delete(Banco ban) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
-    }
-
 }

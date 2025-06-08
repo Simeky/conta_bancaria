@@ -13,6 +13,5 @@ public interface iBancoDAO {
     void update(Banco ban);
     void save(Banco ban);
     void delete(long id);
-    void delete(Banco ban);
 
 }
