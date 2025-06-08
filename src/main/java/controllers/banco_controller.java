@@ -51,19 +51,20 @@ public class banco_controller implements iBancoDAO{
 
     @Override
     public Banco find_banco(String nome) {
-        final String intruction =   "Select  ban.bd_id_banco, " +
-                                            "ban.bd_cod_instituicao_banco, " + 
-                                            "ban.bd_nome_banco, " + 
-                                            "ban.bd_mascara_conta_banco "  + 
-                                    "From t_banco ban " +  
-                                    "Where ban.bd_nome_banco = ?;";
+        StringBuilder sql = new StringBuilder(
+            "Select  ban.bd_id_banco, " +
+                    "ban.bd_cod_instituicao_banco, " + 
+                    "ban.bd_nome_banco, " + 
+                    "ban.bd_mascara_conta_banco "  + 
+                    "From t_banco ban " +  
+                    "Where ban.bd_nome_banco = ?;");
         Connection conexao = MySQL.conectar();
         PreparedStatement command = null;
         ResultSet dados = null;
         Banco ban = null;
 
         try {
-            command = conexao.prepareStatement(intruction);
+            command = conexao.prepareStatement(sql.toString());
             command.setString(1, nome);
             dados = command.executeQuery();
 
@@ -87,13 +88,21 @@ public class banco_controller implements iBancoDAO{
 
     @Override
     public List<Banco> find_all(String condicao, String ordem) {
-        final String intruction =   "Select  ban.bd_id_banco, " + 
-                                            "ban.bd_cod_instituicao_banco, " + 
-                                            "ban.bd_nome_banco, " + 
-                                            "ban.bd_mascara_conta_banco "  + 
-                                    "from t_banco ban ";
-        String Condicao   =         "where ? ";
-        String Ordem      =         "Order by ?";
+        StringBuilder sql = new StringBuilder(
+            "Select  ban.bd_id_banco, " + 
+                    "ban.bd_cod_instituicao_banco, " + 
+                    "ban.bd_nome_banco, " + 
+                    "ban.bd_mascara_conta_banco " + 
+                    "From t_banco ban"
+        );
+
+        if (condicao != null && !condicao.trim().isEmpty()) {
+            sql.append(" Where ").append(condicao);
+        }
+        if (ordem != null && !ordem.trim().isEmpty()) {
+            sql.append(" Order by ").append(ordem);
+        }
+        sql.append(";");
 
         Connection conexao = MySQL.conectar();
         PreparedStatement command = null;
@@ -101,17 +110,7 @@ public class banco_controller implements iBancoDAO{
         List<Banco> lista = new ArrayList<Banco>();
 
         try {
-
-            command = conexao.prepareStatement(intruction + (!condicao.isEmpty()? Condicao:"") + (!ordem.isEmpty()? Ordem:""));
-
-            if (!condicao.isEmpty()) {
-                command.setString(1, Condicao);                
-            }
-
-            if (!ordem.isEmpty()) {
-                command.setString((condicao.isEmpty()? 1:2), Ordem);                
-            }
-            
+            command = conexao.prepareStatement(sql.toString());
             dados = command.executeQuery();
 
             while (dados.next()) {
