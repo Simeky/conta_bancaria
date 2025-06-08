@@ -65,7 +65,7 @@ CREATE TABLE t_pessoa (
 );
 
 CREATE TABLE t_pessoa_fisica (
-    bd_id_pf integer PRIMARY KEY, -- herdado de pessoa, sem auto_increment
+    bd_id_pf integer PRIMARY KEY,
     bd_cpf_pf CHAR(14),
     bd_nome_registro_pf VARCHAR(100),
     bd_nome_social_pf VARCHAR(100),
@@ -83,7 +83,7 @@ Create table t_quadro_societario(
 );
 
 CREATE TABLE t_pessoa_juridica (
-    bd_id_pj integer PRIMARY KEY, -- herdado de pessoa, sem auto_increment
+    bd_id_pj integer PRIMARY KEY,
     bd_cnpj_pj CHAR(18),
     bd_razao_social_pj VARCHAR(100),
     bd_nome_fantasia_pj VARCHAR(100),
@@ -113,25 +113,25 @@ CREATE TABLE t_conta_bancaria (
 );
 
 CREATE TABLE t_conta_corrente (
-    bd_id_cc integer PRIMARY KEY, -- herdado de conta_bancaria
+    bd_id_cc integer PRIMARY KEY,
     FOREIGN KEY (bd_id_cc) REFERENCES t_conta_bancaria(bd_id_cb)
 );
 
 CREATE TABLE t_conta_especial (
-    bd_id_ce integer PRIMARY KEY, -- herdado de conta_bancaria
+    bd_id_ce integer PRIMARY KEY,
     bd_limite_credito_ce numeric(15,2),
     bd_vencimento_limite_ce DATE,
     FOREIGN KEY (bd_id_ce) REFERENCES t_conta_bancaria(bd_id_cb)
 );
 
 CREATE TABLE t_conta_poupanca (
-    bd_id_cp integer PRIMARY KEY, -- herdado de conta_bancaria
+    bd_id_cp integer PRIMARY KEY,
     bd_indice_reajuste_cp numeric(5,2),
     FOREIGN KEY (bd_id_cp) REFERENCES t_conta_bancaria(bd_id_cb)
 );
 
 CREATE TABLE t_conta_salario (
-    bd_id_cs integer PRIMARY KEY, -- herdado de conta_bancaria
+    bd_id_cs integer PRIMARY KEY, 
     bd_id_pj integer,
     bd_limite_adiantamento_cs numeric(10,2),
     bd_id_cb integer,
