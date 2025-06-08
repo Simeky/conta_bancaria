@@ -183,13 +183,13 @@ public class banco_controller implements iBancoDAO{
 
     @Override
     public void save(Banco ban) {
-        if (ban.getBanco_id() == 0) {
-            // Se o ID for zero, insere um novo registro
+
+        if (ban.getBanco_id() == 0) 
             insert(ban);
-        } else {
-            // Se o ID já existe, atualiza o registro
+        else 
             update(ban);
-        }
+        
+
     }
 
     @Override
