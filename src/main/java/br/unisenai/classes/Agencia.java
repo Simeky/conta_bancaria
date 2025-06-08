@@ -4,7 +4,7 @@ public class Agencia {
 
     private long agencia_id;
     private Banco agencia_banco;
-    private Enderecamento agencia_end;
+    private Endereco agencia_end;
     private int agencia_num_end;
     private String agencia_compl;
     private String agencia_fone;
@@ -34,11 +34,11 @@ public class Agencia {
         this.agencia_banco = agencia_banco;
     }
 
-    public Enderecamento getAgencia_end() {
+    public Endereco getAgencia_end() {
         return agencia_end;
     }
 
-    public void setAgencia_end(Enderecamento agencia_end) {
+    public void setAgencia_end(Endereco agencia_end) {
         this.agencia_end = agencia_end;
     }
 

@@ -5,7 +5,7 @@ import java.sql.Date;
 public abstract class Pessoa {
 
     private long pessoa_id;
-    private Enderecamento pessoa_end;
+    private Endereco pessoa_end;
     private int pessoa_num_end;
     private String pessoa_compl;
     private String pessoa_fone;
@@ -29,11 +29,11 @@ public abstract class Pessoa {
         this.pessoa_id = pessoa_id;
     }
 
-    public Enderecamento getPessoa_end() {
+    public Endereco getPessoa_end() {
         return pessoa_end;
     }
 
-    public void setPessoa_end(Enderecamento pessoa_end) {
+    public void setPessoa_end(Endereco pessoa_end) {
         this.pessoa_end = pessoa_end;
     }
 

@@ -11,7 +11,7 @@ import connections.MySQL;
 import br.unisenai.classes.Banco;
 import interfaces.DAO.iBancoDAO;
 
-public class banco_controller implements iBancoDAO{
+public class Banco_controller implements iBancoDAO{
 
     @Override
     public Banco find_banco(long id) {

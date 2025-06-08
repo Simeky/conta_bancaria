@@ -1,6 +1,6 @@
 package br.unisenai.classes;
 
-public class Enderecamento {
+public class Endereco {
 
     private long end_id;
     private String end_logradouro;
@@ -9,7 +9,7 @@ public class Enderecamento {
     private String end_uf;
     private String end_cep;
 
-    public Enderecamento() {}
+    public Endereco() {}
     
     //Getters 'n Setters
 
