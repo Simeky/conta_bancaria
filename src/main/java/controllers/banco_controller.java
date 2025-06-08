@@ -140,7 +140,7 @@ public class Banco_controller implements iBancoDAO{
         PreparedStatement command = null;
 
         try {
-            command = conexao.prepareStatement(sql.toString());
+            command = conexao.prepareStatement(sql.toString(), PreparedStatement.RETURN_GENERATED_KEYS);
             command.setString(1, ban.getBanco_cod_inst());
             command.setString(2, ban.getBanco_nome());
             command.setString(3, ban.getBanco_mascara_cb());
