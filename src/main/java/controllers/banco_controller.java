@@ -189,8 +189,25 @@ public class banco_controller implements iBancoDAO{
 
     @Override
     public void delete(long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        StringBuilder sql = new StringBuilder(
+            "Delete From t_banco " + 
+            "Where bd_id_banco = ?;");
+
+        Connection conexao = MySQL.conectar();
+        PreparedStatement command = null;
+        try {
+            command = conexao.prepareStatement(sql.toString());
+            command.setLong(1, id);
+
+            if (command.executeUpdate() == 0) {
+                throw new RuntimeException("Nenhum registro foi excluído. Verifique se o ID existe.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Problema na exclusão dos dados:\n" + e.getMessage());
+        } finally {
+            MySQL.desconectar(conexao, command);
+        }
+
     }
 
     @Override
