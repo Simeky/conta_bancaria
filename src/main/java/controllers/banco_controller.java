@@ -133,13 +133,14 @@ public class banco_controller implements iBancoDAO{
 
     @Override
     public void insert(Banco ban) {
-        final String intruction = "Insert into t_banco (bd_cod_instituicao_banco, bd_nome_banco, bd_mascara_conta_banco)" +
-                                 " Values (?, ?, ?);";
+        StringBuilder sql = new StringBuilder(
+            "Insert into t_banco (bd_cod_instituicao_banco, bd_nome_banco, bd_mascara_conta_banco) " +
+                                 "Values (?, ?, ?);");
         Connection conexao = MySQL.conectar();
         PreparedStatement command = null;
 
         try {
-            command = conexao.prepareStatement(intruction);
+            command = conexao.prepareStatement(sql.toString());
             command.setString(1, ban.getBanco_cod_inst());
             command.setString(2, ban.getBanco_nome());
             command.setString(3, ban.getBanco_mascara_cb());
