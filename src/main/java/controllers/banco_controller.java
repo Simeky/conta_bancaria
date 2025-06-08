@@ -15,19 +15,20 @@ public class banco_controller implements iBancoDAO{
 
     @Override
     public Banco find_banco(long id) {
-        final String intruction =   "Select  ban.bd_id_banco, " + 
-                                            "ban.bd_cod_instituicao_banco, " + 
-                                            "ban.bd_nome_banco, " + 
-                                            "ban.bd_mascara_conta_banco "  + 
-                                    "From t_banco ban " +  
-                                    "Where ban.bd_id_banco = ?;";
+        StringBuilder sql = new StringBuilder(
+            "Select  ban.bd_id_banco, " + 
+                    "ban.bd_cod_instituicao_banco, " + 
+                    "ban.bd_nome_banco, " + 
+                    "ban.bd_mascara_conta_banco "  + 
+                    "From t_banco ban " +  
+                    "Where ban.bd_id_banco = ?;");
         Connection conexao = MySQL.conectar();
         PreparedStatement command = null;
         ResultSet dados = null;
         Banco ban = null;
 
         try {
-            command = conexao.prepareStatement(intruction);
+            command = conexao.prepareStatement(sql.toString());
             command.setLong(1, id);
             dados = command.executeQuery();
 
