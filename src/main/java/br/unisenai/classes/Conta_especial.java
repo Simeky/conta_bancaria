@@ -13,6 +13,8 @@ public class Conta_especial extends Conta_bancaria{
 
     }
 
+    //Getters 'n Setters'
+
     public double getCe_limite_cred() {
         return ce_limite_cred;
     }

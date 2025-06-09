@@ -24,7 +24,21 @@ public abstract class Conta_bancaria {
         setCb_status(eStatus.Ativa);
 
     }
+    
+    public Conta_bancaria(  long cb_id, 
+                            Agencia cb_agencia, 
+                            Pessoa cb_titular1, 
+                            Pessoa cb_titular2, 
+                            Date cb_abertura,
+                            double cb_saldo, 
+                            String cb_pswrd, 
+                            String cb_bandeira_card, 
+                            String cb_num_card, 
+                            Date cb_val_card,
+                            short cb_cvv_card, 
+                            eStatus cb_status) {
 
+    }
 
     //Getters 'n Setters
 

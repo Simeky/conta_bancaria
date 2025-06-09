@@ -10,8 +10,16 @@ public class Endereco {
     private String end_cep;
 
     public Endereco() {}
+
+    public Endereco(long end_id, 
+                    String end_logradouro, 
+                    String end_bairro, 
+                    String end_municipio, 
+                    String end_uf,
+                    String end_cep) {
+    }
     
-    //Getters 'n Setters
+    //Getters 'n Setters    
 
     public long getEnd_id() {
         return end_id;

@@ -18,6 +18,21 @@ public class Pessoa_juridica extends Pessoa{
 
     //Getters 'n Setters
 
+    public Pessoa_juridica( long pesssoa_id, 
+                            Endereco pessoa_end, 
+                            int Pessoa_num_end, 
+                            String pessoa_compl,
+                            String pessoa_fone,
+                            Date pessoa_cliente_desde,
+                            Boolean pessoa_status,
+                            String pj_cnpj, 
+                            String pj_razao_social, 
+                            String nome_fantasia, 
+                            Date pj_data_abertura,
+                            double pj_capital_social) {
+        super();
+    }
+
     public String getPj_cnpj() {
         return pj_cnpj;
     }

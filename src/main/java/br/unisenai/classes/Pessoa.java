@@ -13,9 +13,6 @@ public abstract class Pessoa {
     private Boolean pessoa_status;
 
     public Pessoa() {
-
-       setPessoa_status(true);
-
     }
 
 

@@ -12,12 +12,20 @@ public class Agencia {
 
     public Agencia(){
 
-        setAgencia_status(true);
+    }
+
+    public Agencia( long agencia_id, 
+                    Banco agencia_banco, 
+                    Endereco agencia_end, 
+                    int agencia_num_end,
+                    String agencia_compl, 
+                    String agencia_fone, 
+                    Boolean agencia_status) {
 
     }
 
     //Getters 'n Setters
-
+    
     public long getAgencia_id() {
         return agencia_id;
     }

@@ -14,6 +14,8 @@ public class Conta_salario extends Conta_bancaria{
 
     }
 
+    // Getters 'n Setters
+
     public Pessoa_juridica getCs_empresa() {
         return cs_empresa;
     }

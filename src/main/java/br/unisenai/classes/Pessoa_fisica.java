@@ -19,7 +19,23 @@ public class Pessoa_fisica extends Pessoa{
 
     }
 
-    //Getters 'n Setters
+    public Pessoa_fisica(   long pesssoa_id, 
+                            Endereco pessoa_end, 
+                            int Pessoa_num_end, 
+                            String pessoa_compl,
+                            String pessoa_fone,
+                            Date pessoa_cliente_desde,
+                            Boolean pessoa_status,
+                            String pf_cpf, 
+                            String pf_nome_registro, 
+                            String pf_nome_social, 
+                            Date pf_data_nasc,
+                            eSexo pf_sexo, 
+                            double pf_renda_mes) {        
+        super();        
+    }
+
+    //Getters 'n Setters    
 
     public String getPf_cpf() {
         return pf_cpf;
