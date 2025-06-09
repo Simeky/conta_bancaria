@@ -8,7 +8,6 @@ public class Pessoa_juridica extends Pessoa{
     private String  pj_razao_social;
     private String  nome_fantasia;
     private Date    pj_data_abertura;
-    private Quadro_societario pj_quadro_socio;
     private double pj_capital_social;
 
     public Pessoa_juridica() {
@@ -49,14 +48,6 @@ public class Pessoa_juridica extends Pessoa{
 
     public void setPj_data_abertura(Date pj_data_abertura) {
         this.pj_data_abertura = pj_data_abertura;
-    }
-
-    public Quadro_societario getPj_quadro_socio() {
-        return pj_quadro_socio;
-    }
-
-    public void setPj_quadro_socio(Quadro_societario pj_quadro_socio) {
-        this.pj_quadro_socio = pj_quadro_socio;
     }
 
     public double getPj_capital_social() {

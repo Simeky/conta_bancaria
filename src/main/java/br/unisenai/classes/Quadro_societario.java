@@ -4,7 +4,7 @@ public class Quadro_societario {
 
     private long qua_id;
     private Pessoa_juridica qua_empresa;
-    private Pessoa qua_socio;
+    private Pessoa_fisica qua_socio;
     private double qua_perc; // %
 
     public Quadro_societario() {}
@@ -32,7 +32,7 @@ public class Quadro_societario {
         return qua_socio;
     }
 
-    public void setQua_socio(Pessoa qua_socio) {
+    public void setQua_socio(Pessoa_fisica qua_socio) {
         this.qua_socio = qua_socio;
     }
 

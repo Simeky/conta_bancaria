@@ -19,8 +19,7 @@ public class Pessoa_juridica_controller implements iPessoa_juridicaDAO {
                     "pj.bd_cnpj_pj, " + 
                     "pj.bd_razao_social_pj, " + 
                     "pj.bd_nome_fantasia_pj, " + 
-                    "pj.bd_abertura_pj, " + 
-                    "pj.bd_id_qs, " + 
+                    "pj.bd_abertura_pj, " +
                     "pj.bd_capital_social_pj " +
             "From t_pessoa_juridica " + 
             "Where bd_id_pj = ?;");
@@ -42,8 +41,7 @@ public class Pessoa_juridica_controller implements iPessoa_juridicaDAO {
                 pj.setPj_razao_social(dados.getString(3));
                 pj.setNome_fantasia(dados.getString(4));
                 pj.setPj_data_abertura(dados.getDate(5));
-                pj.setPj_quadro_societario(new Quadro_societario_controller().find_quadro_societario(dados.getLong(6)));
-                pj.setPj_capital_social(dados.getDouble(7));
+                pj.setPj_capital_social(dados.getDouble(6));
             }
         } catch (SQLException e) {
             throw new RuntimeException("Problema no retorno dos dados:\n" + e.getMessage());
@@ -62,7 +60,6 @@ public class Pessoa_juridica_controller implements iPessoa_juridicaDAO {
                     "pj.bd_razao_social_pj, " + 
                     "pj.bd_nome_fantasia_pj, " + 
                     "pj.bd_abertura_pj, " + 
-                    "pj.bd_id_qs, " + 
                     "pj.bd_capital_social_pj " + 
             "From t_pessoa_juridica pj");
 
@@ -90,8 +87,7 @@ public class Pessoa_juridica_controller implements iPessoa_juridicaDAO {
                 pj.setPj_razao_social(dados.getString(3));
                 pj.setNome_fantasia(dados.getString(4));
                 pj.setPj_data_abertura(dados.getDate(5));
-                pj.setPj_quadro_socio(new Quadro_societario_controller().find_quadro_societario(dados.getLong(6)));
-                pj.setPj_capital_social(dados.getDouble(7));
+                pj.setPj_capital_social(dados.getDouble(6));
                 lista.add(pj);
             }
         } catch (SQLException e) {
@@ -119,8 +115,7 @@ public class Pessoa_juridica_controller implements iPessoa_juridicaDAO {
             command.setString(3, pj.getPj_razao_social());
             command.setString(4, pj.getNome_fantasia());
             command.setDate(5, pj.getPj_data_abertura());
-            command.setLong(6, pj.getPj_quadro_socio().getQua_id());
-            command.setDouble(7, pj.getPj_capital_social());
+            command.setDouble(6, pj.getPj_capital_social());
 
             if (command.executeUpdate() == 0) {
                 throw new RuntimeException("Nenhum registro foi adicionado. Verifique se não inseriu nenhum valor inválido");
@@ -151,9 +146,8 @@ public class Pessoa_juridica_controller implements iPessoa_juridicaDAO {
             command.setString(2, pj.getPj_razao_social());
             command.setString(3, pj.getNome_fantasia());
             command.setDate(4, pj.getPj_data_abertura());
-            command.setLong(5, pj.getPj_quadro_socio().getQua_id());
-            command.setDouble(6, pj.getPj_capital_social());
-            command.setLong(7, pj.getPessoa_id());
+            command.setDouble(5, pj.getPj_capital_social());
+            command.setLong(6, pj.getPessoa_id());
 
             if (command.executeUpdate() == 0) {
                 throw new RuntimeException("Nenhum registro foi atualizado. Verifique se o ID existe.");

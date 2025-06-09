@@ -75,23 +75,14 @@ CREATE TABLE t_pessoa_fisica (
     FOREIGN KEY (bd_id_pf) REFERENCES t_pessoa(bd_id_pes)
 );
 
-Create table t_quadro_societario(
-	bd_id_qs integer primary key auto_increment,
-    bd_id_pes integer,
-    bd_percentual_qs numeric(10,2),
-    Foreign key (bd_id_pes) references t_pessoa(bd_id_pes)
-);
-
 CREATE TABLE t_pessoa_juridica (
     bd_id_pj integer PRIMARY KEY,
     bd_cnpj_pj CHAR(18),
     bd_razao_social_pj VARCHAR(100),
     bd_nome_fantasia_pj VARCHAR(100),
     bd_abertura_pj DATE,
-    bd_id_qs integer,
     bd_capital_social_pj numeric(15,2),
-    FOREIGN KEY (bd_id_pj) REFERENCES t_pessoa(bd_id_pes),
-    Foreign key (bd_id_qs) references t_quadro_societario(bd_id_qs)
+    FOREIGN KEY (bd_id_pj) REFERENCES t_pessoa(bd_id_pes)
 );
 
 CREATE TABLE t_conta_bancaria (
