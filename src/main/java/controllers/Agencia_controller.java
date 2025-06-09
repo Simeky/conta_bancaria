@@ -85,15 +85,13 @@ public class Agencia_controller implements iAgenciaDAO {
             dados = command.executeQuery();
 
             while (dados.next()) {
-                Agencia ag = new Agencia();
-                ag.setAgencia_id(dados.getLong(1));
-                ag.setAgencia_banco(new Banco_controller().find_banco(dados.getLong(2)));
-                ag.setAgencia_end(new Endereco_controller().find_endereco(dados.getLong(3)));
-                ag.setAgencia_num_end(dados.getInt(4));
-                ag.setAgencia_compl(dados.getString(5));
-                ag.setAgencia_fone(dados.getString(6));
-                ag.setAgencia_status(dados.getBoolean(7));
-                lista.add(ag);
+                lista.add(new Agencia(  dados.getLong(1),
+                                        new Banco_controller().find_banco(dados.getLong(2)),
+                                        new Endereco_controller().find_endereco(dados.getLong(3)),
+                                        dados.getInt(4),
+                                        dados.getString(5),
+                                        dados.getString(6),
+                                        dados.getBoolean(7)));
             }
         } catch (SQLException e) {
             throw new RuntimeException("Problema no retorno dos dados:\n" + e.getMessage());
