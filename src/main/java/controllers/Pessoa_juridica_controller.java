@@ -1,0 +1,208 @@
+package controllers;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import connections.MySQL;
+import br.unisenai.classes.Pessoa_juridica;
+import interfaces.DAO.iPessoa_juridicaDAO;
+
+public class Pessoa_juridica_controller implements iPessoa_juridicaDAO {
+
+    @Override
+    public Pessoa_juridica find_pessoa_juridica(long id) {
+        StringBuilder sql = new StringBuilder(
+            "Select  pj.bd_id_pj, " + 
+                    "pj.bd_cnpj_pj, " + 
+                    "pj.bd_razao_social_pj, " + 
+                    "pj.bd_nome_fantasia_pj, " + 
+                    "pj.bd_abertura_pj, " + 
+                    "pj.bd_id_qs, " + 
+                    "pj.bd_capital_social_pj " +
+            "From t_pessoa_juridica " + 
+            "Where bd_id_pj = ?;");
+            
+        Connection conexao = MySQL.conectar();
+        PreparedStatement command = null;
+        ResultSet dados = null;
+        Pessoa_juridica pj = null;
+
+        try {
+            command = conexao.prepareStatement(sql.toString());
+            command.setLong(1, id);
+            dados = command.executeQuery();
+
+            if (dados.next()) {
+                pj = new Pessoa_juridica();
+                pj.setPessoa_id(dados.getLong(1));
+                pj.setPj_cnpj(dados.getString(2));
+                pj.setPj_razao_social(dados.getString(3));
+                pj.setNome_fantasia(dados.getString(4));
+                pj.setPj_data_abertura(dados.getDate(5));
+                pj.setPj_quadro_societario(new Quadro_societario_controller().find_quadro_societario(dados.getLong(6)));
+                pj.setPj_capital_social(dados.getDouble(7));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Problema no retorno dos dados:\n" + e.getMessage());
+        } finally {
+            MySQL.desconectar(conexao, command);
+        }
+
+        return pj;
+    }
+
+    @Override
+    public List<Pessoa_juridica> find_all(String condicao, String ordem) {
+        StringBuilder sql = new StringBuilder(
+            "Select  pj.bd_id_pj, " + 
+                    "pj.bd_cnpj_pj, " + 
+                    "pj.bd_razao_social_pj, " + 
+                    "pj.bd_nome_fantasia_pj, " + 
+                    "pj.bd_abertura_pj, " + 
+                    "pj.bd_id_qs, " + 
+                    "pj.bd_capital_social_pj " + 
+            "From t_pessoa_juridica pj");
+
+        if (condicao != null && !condicao.trim().isEmpty()) {
+            sql.append(" Where ").append(condicao);
+        }
+        if (ordem != null && !ordem.trim().isEmpty()) {
+            sql.append(" Order by ").append(ordem);
+        }
+        sql.append(";");
+
+        Connection conexao = MySQL.conectar();
+        PreparedStatement command = null;
+        ResultSet dados = null;
+        List<Pessoa_juridica> lista = new ArrayList<Pessoa_juridica>();
+
+        try {
+            command = conexao.prepareStatement(sql.toString());
+            dados = command.executeQuery();
+
+            while (dados.next()) {
+                Pessoa_juridica pj = new Pessoa_juridica();
+                pj.setPessoa_id(dados.getLong(1));
+                pj.setPj_cnpj(dados.getString(2));
+                pj.setPj_razao_social(dados.getString(3));
+                pj.setNome_fantasia(dados.getString(4));
+                pj.setPj_data_abertura(dados.getDate(5));
+                pj.setPj_quadro_socio(new Quadro_societario_controller().find_quadro_societario(dados.getLong(6)));
+                pj.setPj_capital_social(dados.getDouble(7));
+                lista.add(pj);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Problema no retorno dos dados:\n" + e.getMessage());
+        } finally {
+            MySQL.desconectar(conexao, command);
+        }
+
+        return lista;
+    }
+
+    @Override
+    public void insert(Pessoa_juridica pj) {
+        StringBuilder sql = new StringBuilder(
+            "Insert into t_pessoa_juridica (bd_id_pj, bd_cnpj_pj, bd_razao_social_pj, bd_nome_fantasia_pj, bd_abertura_pj, bd_id_qs, bd_capital_social_pj) " + 
+            "values (?, ?, ?, ?, ?, ?, ?);");
+
+        Connection conexao = MySQL.conectar();
+        PreparedStatement command = null;
+
+        try {
+            command = conexao.prepareStatement(sql.toString());
+            command.setLong(1, pj.getPessoa_id());
+            command.setString(2, pj.getPj_cnpj());
+            command.setString(3, pj.getPj_razao_social());
+            command.setString(4, pj.getNome_fantasia());
+            command.setDate(5, pj.getPj_data_abertura());
+            command.setLong(6, pj.getPj_quadro_socio().getQua_id());
+            command.setDouble(7, pj.getPj_capital_social());
+
+            if (command.executeUpdate() == 0) {
+                throw new RuntimeException("Nenhum registro foi adicionado. Verifique se não inseriu nenhum valor inválido");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Problema na inserção de dados:\n" + e.getMessage());
+        } finally {
+            MySQL.desconectar(conexao, command);
+        }
+    }
+
+    @Override
+    public void update(Pessoa_juridica pj) {
+        StringBuilder sql = new StringBuilder(
+            "Update t_pessoa_juridica set bd_cnpj_pj = ?, " + 
+                                         "bd_razao_social_pj = ?, " + 
+                                         "bd_nome_fantasia_pj = ?, " + 
+                                         "bd_abertura_pj = ?, " + 
+                                         "bd_id_qs = ?, " + 
+                                         "bd_capital_social_pj = ? " + 
+            "Where bd_id_pj = ?;");
+        Connection conexao = MySQL.conectar();
+        PreparedStatement command = null;
+
+        try {
+            command = conexao.prepareStatement(sql.toString());
+            command.setString(1, pj.getPj_cnpj());
+            command.setString(2, pj.getPj_razao_social());
+            command.setString(3, pj.getNome_fantasia());
+            command.setDate(4, pj.getPj_data_abertura());
+            command.setLong(5, pj.getPj_quadro_socio().getQua_id());
+            command.setDouble(6, pj.getPj_capital_social());
+            command.setLong(7, pj.getPessoa_id());
+
+            if (command.executeUpdate() == 0) {
+                throw new RuntimeException("Nenhum registro foi atualizado. Verifique se o ID existe.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Problema na atualização dos dados:\n" + e.getMessage());
+        } finally {
+            MySQL.desconectar(conexao, command);
+        }
+    }
+
+    @Override
+    public void save(Pessoa_juridica pj) {
+        if (find_pessoa_juridica(pj.getPessoa_id()) == null)
+            insert(pj);
+        else
+            update(pj);
+    }
+
+    @Override
+    public void delete(long id) {
+        StringBuilder sql = new StringBuilder(
+            "Delete from t_pessoa_juridica " + 
+            "Where bd_id_pj = ?;");
+        Connection conexao = MySQL.conectar();
+        PreparedStatement command = null;
+        try {
+            command = conexao.prepareStatement(sql.toString());
+            command.setLong(1, id);
+
+            if (command.executeUpdate() == 0) {
+                throw new RuntimeException("Nenhum registro foi excluído. Verifique se o ID existe.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Problema na exclusão dos dados:\n" + e.getMessage());
+        } finally {
+            MySQL.desconectar(conexao, command);
+        }
+    }
+
+    @Override
+    public Pessoa_juridica find_pessoa_juridica(String t) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'find_pessoa_juridica'");
+    }
+
+    @Override
+    public void delete(Pessoa_juridica pj) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    }
+}
