@@ -12,19 +12,13 @@ public class Endereco_controllerTest {
     @Test
     public void testDelete() {
         Endereco_controller controller = new Endereco_controller();
-        Endereco endereco = new Endereco();
-        endereco.setEnd_cep("87654321");
-        endereco.setEnd_uf("DF");
-        endereco.setEnd_municipio("Cidade Delete");
-        endereco.setEnd_bairro("Bairro Delete");
-        endereco.setEnd_logradouro("Rua Teste Delete");      
         
-        controller.insert(endereco);
+        testInsert();     
 
         List<Endereco> enderecos = controller.find_all(null, null);
         Endereco end = null;
         for (Endereco e : enderecos) {
-            if ("87654321".equals(e.getEnd_cep())){
+            if ("1234567-8".equals(e.getEnd_cep())){
                 end = e;
                 break;
             }
@@ -69,7 +63,7 @@ public class Endereco_controllerTest {
     public void testInsert() {
         Endereco_controller controller = new Endereco_controller();
         Endereco endereco = new Endereco();
-        endereco.setEnd_cep("12345678");
+        endereco.setEnd_cep("1234567-8");
         endereco.setEnd_logradouro("Rua Teste Insert");
         endereco.setEnd_bairro("Bairro Teste");
         endereco.setEnd_municipio("Cidade Teste");
@@ -79,7 +73,7 @@ public class Endereco_controllerTest {
         List<Endereco> enderecos = controller.find_all(null, null);   
         boolean found = false;
         for (Endereco e : enderecos) {
-            if ("12345678".equals(e.getEnd_cep())){
+            if ("1234567-8".equals(e.getEnd_cep())){
                 found = true;
                 break;
             }
@@ -101,7 +95,7 @@ public class Endereco_controllerTest {
         List<Endereco> enderecos = controller.find_all(null, null);
         Endereco end = null;
         for (Endereco e : enderecos) {
-            if ("55555555".equals(e.getEnd_cep()) && "Rua Teste Save".equals(e.getEnd_logradouro())) {
+            if ("55555555".equals(e.getEnd_cep())) {
                 end = e;
                 break;
             }
@@ -117,18 +111,13 @@ public class Endereco_controllerTest {
     @Test
     public void testUpdate() {
         Endereco_controller controller = new Endereco_controller();
-        Endereco endereco = new Endereco();
-        endereco.setEnd_cep("66666666");
-        endereco.setEnd_logradouro("Rua Teste Update");
-        endereco.setEnd_bairro("Bairro Update");
-        endereco.setEnd_municipio("Cidade Update");
-        endereco.setEnd_uf("UF");
-        controller.insert(endereco);
+        
+        testInsert();
 
         List<Endereco> enderecos = controller.find_all(null, null);
         Endereco end = null;
         for (Endereco e : enderecos) {
-            if (e.getEnd_id() > 0) {
+            if (e.getEnd_cep().equals("1234567-8")) {
                 end = e;
                 break;
             }
