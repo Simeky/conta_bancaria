@@ -9,7 +9,6 @@ public class Banco_controllerTest {
     @Test
     public void testDelete() {
         Banco_controller controller = new Banco_controller();
-        // Insere um banco para deletar
         Banco banco = new Banco();
         banco.setBanco_cod_inst("88888");
         banco.setBanco_nome("Banco Teste Delete");
