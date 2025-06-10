@@ -12,7 +12,7 @@ public interface iPessoa_juridicaDAO {
     void insert(Pessoa_juridica pj);
     void update(Pessoa_juridica pj);
     void save(Pessoa_juridica pj);
-    void delete(long id);
-    void delete(Pessoa_juridica pj);
+    void desativar(long id);
+    void desativar(Pessoa_juridica pj);
 
 }

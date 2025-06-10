@@ -114,61 +114,103 @@ public class Pessoa_juridica_controller implements iPessoa_juridicaDAO {
 
     @Override
     public void insert(Pessoa_juridica pj) {
-        StringBuilder sql = new StringBuilder(
-            "Insert into t_pessoa_juridica (bd_id_pj, bd_cnpj_pj, bd_razao_social_pj, bd_nome_fantasia_pj, bd_abertura_pj, bd_id_qs, bd_capital_social_pj) " + 
-            "values (?, ?, ?, ?, ?, ?, ?);");
-
+        // Primeiro insere na tabela t_pessoa
+        StringBuilder insert_pessoa = new StringBuilder(
+            "Insert into t_pessoa (bd_id_end, bd_num_end_pes, bd_complemento_end_pes, bd_fone_pes, bd_cliente_desde_pes, bd_status_pes) values (?, ?, ?, ?, ?, ?);");
+        StringBuilder insert_pj = new StringBuilder(
+            "Insert into t_pessoa_juridica (bd_id_pj, bd_cnpj_pj, bd_razao_social_pj, bd_nome_fantasia_pj, bd_abertura_pj, bd_capital_social_pj) values (?, ?, ?, ?, ?, ?);");
         Connection conexao = MySQL.conectar();
-        PreparedStatement command = null;
-
+        PreparedStatement commandPessoa = null;
+        PreparedStatement commandPJ = null;
+        ResultSet generatedKeys = null;
         try {
-            command = conexao.prepareStatement(sql.toString());
-            command.setLong(1, pj.getPessoa_id());
-            command.setString(2, pj.getPj_cnpj());
-            command.setString(3, pj.getPj_razao_social());
-            command.setString(4, pj.getNome_fantasia());
-            command.setDate(5, pj.getPj_data_abertura());
-            command.setDouble(6, pj.getPj_capital_social());
-
-            if (command.executeUpdate() == 0) {
-                throw new RuntimeException("Nenhum registro foi adicionado. Verifique se não inseriu nenhum valor inválido");
+            // Insere na t_pessoa
+            commandPessoa = conexao.prepareStatement(insert_pessoa.toString(), PreparedStatement.RETURN_GENERATED_KEYS);
+            commandPessoa.setLong(1, pj.getPessoa_end().getEnd_id());
+            commandPessoa.setInt(2, pj.getPessoa_num_end());
+            commandPessoa.setString(3, pj.getPessoa_compl());
+            commandPessoa.setString(4, pj.getPessoa_fone());
+            commandPessoa.setDate(5, pj.getPessoa_cliente_desde());
+            commandPessoa.setBoolean(6, pj.getPessoa_status());
+            if (commandPessoa.executeUpdate() == 0) {
+                throw new RuntimeException("Nenhum registro foi adicionado em t_pessoa. Verifique se não inseriu nenhum valor inválido");
+            }
+            generatedKeys = commandPessoa.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                pj.setPessoa_id(generatedKeys.getLong(1));
+            } else {
+                throw new RuntimeException("Falha ao obter o ID gerado para t_pessoa.");
+            }
+            // Insere na t_pessoa_juridica
+            commandPJ = conexao.prepareStatement(insert_pj.toString());
+            commandPJ.setLong(1, pj.getPessoa_id());
+            commandPJ.setString(2, pj.getPj_cnpj());
+            commandPJ.setString(3, pj.getPj_razao_social());
+            commandPJ.setString(4, pj.getNome_fantasia());
+            commandPJ.setDate(5, pj.getPj_data_abertura());
+            commandPJ.setDouble(6, pj.getPj_capital_social());
+            if (commandPJ.executeUpdate() == 0) {
+                throw new RuntimeException("Nenhum registro foi adicionado em t_pessoa_juridica. Verifique se não inseriu nenhum valor inválido");
             }
         } catch (SQLException e) {
             throw new RuntimeException("Problema na inserção de dados:\n" + e.getMessage());
         } finally {
-            MySQL.desconectar(conexao, command);
+            MySQL.desconectar(null, commandPessoa);
+            MySQL.desconectar(conexao, commandPJ);
+            try { if (generatedKeys != null) generatedKeys.close(); } catch (Exception e) {}
         }
     }
 
     @Override
     public void update(Pessoa_juridica pj) {
-        StringBuilder sql = new StringBuilder(
-            "Update t_pessoa_juridica set bd_cnpj_pj = ?, " + 
-                                         "bd_razao_social_pj = ?, " + 
-                                         "bd_nome_fantasia_pj = ?, " + 
-                                         "bd_abertura_pj = ?, " + 
-                                         "bd_id_qs = ?, " + 
-                                         "bd_capital_social_pj = ? " + 
-            "Where bd_id_pj = ?;");
         Connection conexao = MySQL.conectar();
-        PreparedStatement command = null;
-
+        PreparedStatement commandPessoa = null;
+        PreparedStatement commandPJ = null;
         try {
-            command = conexao.prepareStatement(sql.toString());
-            command.setString(1, pj.getPj_cnpj());
-            command.setString(2, pj.getPj_razao_social());
-            command.setString(3, pj.getNome_fantasia());
-            command.setDate(4, pj.getPj_data_abertura());
-            command.setDouble(5, pj.getPj_capital_social());
-            command.setLong(6, pj.getPessoa_id());
+            // Atualiza t_pessoa
+            StringBuilder sqlPessoa = new StringBuilder(
+                "Update t_pessoa set bd_id_end = ?, " +
+                                    "bd_num_end_pes = ?, " +
+                                    "bd_complemento_end_pes = ?, " +
+                                    "bd_fone_pes = ?, " +
+                                    "bd_cliente_desde_pes = ?, " +
+                                    "bd_status_pes = ? " +
+                "Where bd_id_pes = ?;");
+            commandPessoa = conexao.prepareStatement(sqlPessoa.toString());
+            commandPessoa.setLong(1, pj.getPessoa_end().getEnd_id());
+            commandPessoa.setInt(2, pj.getPessoa_num_end());
+            commandPessoa.setString(3, pj.getPessoa_compl());
+            commandPessoa.setString(4, pj.getPessoa_fone());
+            commandPessoa.setDate(5, pj.getPessoa_cliente_desde());
+            commandPessoa.setBoolean(6, pj.getPessoa_status());
+            commandPessoa.setLong(7, pj.getPessoa_id());
+            if (commandPessoa.executeUpdate() == 0) {
+                throw new RuntimeException("Nenhum registro foi atualizado em t_pessoa. Verifique se o ID existe.");
+            }
 
-            if (command.executeUpdate() == 0) {
-                throw new RuntimeException("Nenhum registro foi atualizado. Verifique se o ID existe.");
+            // Atualiza t_pessoa_juridica
+            StringBuilder sqlPJ = new StringBuilder(
+                "Update t_pessoa_juridica set bd_cnpj_pj = ?, " +
+                                             "bd_razao_social_pj = ?, " +
+                                             "bd_nome_fantasia_pj = ?, " +
+                                             "bd_abertura_pj = ?, " +
+                                             "bd_capital_social_pj = ? " +
+                "Where bd_id_pj = ?;");
+            commandPJ = conexao.prepareStatement(sqlPJ.toString());
+            commandPJ.setString(1, pj.getPj_cnpj());
+            commandPJ.setString(2, pj.getPj_razao_social());
+            commandPJ.setString(3, pj.getNome_fantasia());
+            commandPJ.setDate(4, pj.getPj_data_abertura());
+            commandPJ.setDouble(5, pj.getPj_capital_social());
+            commandPJ.setLong(6, pj.getPessoa_id());
+            if (commandPJ.executeUpdate() == 0) {
+                throw new RuntimeException("Nenhum registro foi atualizado em t_pessoa_juridica. Verifique se o ID existe.");
             }
         } catch (SQLException e) {
             throw new RuntimeException("Problema na atualização dos dados:\n" + e.getMessage());
         } finally {
-            MySQL.desconectar(conexao, command);
+            MySQL.desconectar(null, commandPessoa);
+            MySQL.desconectar(conexao, commandPJ);
         }
     }
 
@@ -181,34 +223,33 @@ public class Pessoa_juridica_controller implements iPessoa_juridicaDAO {
     }
 
     @Override
-    public void delete(long id) {
+    public void desativar(long id) {
         StringBuilder sql = new StringBuilder(
-            "Delete from t_pessoa_juridica " + 
-            "Where bd_id_pj = ?;");
+            "Update t_pessoa set bd_status_pes = false " + 
+            "Where bd_id_pes = ?;");
         Connection conexao = MySQL.conectar();
         PreparedStatement command = null;
         try {
             command = conexao.prepareStatement(sql.toString());
             command.setLong(1, id);
-
             if (command.executeUpdate() == 0) {
-                throw new RuntimeException("Nenhum registro foi excluído. Verifique se o ID existe.");
+                throw new RuntimeException("Nenhum registro foi desativado. Verifique se o ID existe.");
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Problema na exclusão dos dados:\n" + e.getMessage());
+            throw new RuntimeException("Problema ao desativar o registro:\n" + e.getMessage());
         } finally {
             MySQL.desconectar(conexao, command);
         }
     }
 
     @Override
-    public Pessoa_juridica find_pessoa_juridica(String t) {
+    public Pessoa_juridica find_pessoa_juridica(String cnpj) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'find_pessoa_juridica'");
     }
 
     @Override
-    public void delete(Pessoa_juridica pj) {
+    public void desativar(Pessoa_juridica pj) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
