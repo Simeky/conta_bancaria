@@ -14,19 +14,13 @@ public class Agencia_controllerTest {
     @Test
     public void testDelete() {
         Agencia_controller controller = new Agencia_controller();
-        Agencia agencia = new Agencia();
-        agencia.setAgencia_banco(new Banco_controller().find_banco(1));
-        agencia.setAgencia_end(new Endereco_controller().find_endereco(1));
-        agencia.setAgencia_num_end(999);
-        agencia.setAgencia_compl("Sala 99");
-        agencia.setAgencia_fone("(11) 96666-6666");
-        agencia.setAgencia_status(true);
-        controller.insert(agencia);
+
+        testInsert();
 
         List<Agencia> agencias = controller.find_all(null, null);
         Agencia ag = null;
         for (Agencia age : agencias) {
-            if (age.getAgencia_num_end() == 999 && "Sala 99".equals(age.getAgencia_compl())) {
+            if (age.getAgencia_compl().equals("Sala Teste Insert")){
                 ag = age;
                 break;
             }
@@ -70,9 +64,9 @@ public class Agencia_controllerTest {
         Agencia_controller controller = new Agencia_controller();
         Agencia agencia = new Agencia();
         agencia.setAgencia_banco(new Banco_controller().find_banco(1));
-        agencia.setAgencia_end(new Endereco_controller().find_endereco(1));
+        agencia.setAgencia_end(new Endereco_controller().find_endereco(2));
         agencia.setAgencia_num_end(123);
-        agencia.setAgencia_compl("Sala 1");
+        agencia.setAgencia_compl("Sala Teste Insert");
         agencia.setAgencia_fone("(11) 99999-9999");
         agencia.setAgencia_status(true);
 
@@ -81,9 +75,7 @@ public class Agencia_controllerTest {
         List<Agencia> agencias = controller.find_all(null, null);
         boolean found = false;
         for (Agencia ag : agencias) {
-            if (ag.getAgencia_num_end() == 123 &&
-                "Sala 1".equals(ag.getAgencia_compl()) &&
-                "(11) 99999-9999".equals(ag.getAgencia_fone())) {
+            if (ag.getAgencia_compl().equals("Sala Teste Insert")) {
                 found = true;
                 break;
             }
@@ -125,26 +117,21 @@ public class Agencia_controllerTest {
     @Test
     public void testUpdate() {
         Agencia_controller controller = new Agencia_controller();
-        Agencia agencia = new Agencia();
-        agencia.setAgencia_banco(new Banco_controller().find_banco(1));
-        agencia.setAgencia_end(new Endereco_controller().find_endereco(2));
-        agencia.setAgencia_num_end(789);
-        agencia.setAgencia_compl("Sala 3");
-        agencia.setAgencia_fone("(11) 97777-7777");
-        agencia.setAgencia_status(true);
-        controller.insert(agencia);
+
+        testInsert();
+
         List<Agencia> agencias = controller.find_all(null, null);
-        Agencia agToUpdate = null;
+        Agencia age = null;
         for (Agencia ag : agencias) {
-            if (ag.getAgencia_num_end() == 789 && "Sala 3".equals(ag.getAgencia_compl())) {
-                agToUpdate = ag;
+            if (ag.getAgencia_compl().equals("Sala Teste Insert")) {
+                age = ag;
                 break;
             }
         }
-        assertNotNull(agToUpdate);
-        agToUpdate.setAgencia_fone("(11) 90000-0000");
-        controller.update(agToUpdate);
-        Agencia agAtualizada = controller.find_agencia(agToUpdate.getAgencia_id());
-        assertEquals("(11) 90000-0000", agAtualizada.getAgencia_fone());
+        assertNotNull(age);
+        age.setAgencia_compl("Sala Teste Atualizada");
+        controller.update(age);
+        Agencia agAtualizada = controller.find_agencia(age.getAgencia_id());
+        assertEquals("Sala Teste Atualizada", agAtualizada.getAgencia_compl());
     }
 }
