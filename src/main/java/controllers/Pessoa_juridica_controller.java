@@ -56,12 +56,19 @@ public class Pessoa_juridica_controller implements iPessoa_juridicaDAO {
     public List<Pessoa_juridica> find_all(String condicao, String ordem) {
         StringBuilder sql = new StringBuilder(
             "Select  pj.bd_id_pj, " + 
-                    "pj.bd_cnpj_pj, " + 
-                    "pj.bd_razao_social_pj, " + 
-                    "pj.bd_nome_fantasia_pj, " + 
-                    "pj.bd_abertura_pj, " + 
-                    "pj.bd_capital_social_pj " + 
-            "From t_pessoa_juridica pj");
+                    "pj.bd_cnpj_pj" +
+                    "pj.bd_razao_social_pj, " +
+                    "pj.bd_nome_fantasia_pj, " +
+                    "pj.bd_abertura_pj, " +
+                    "pj.bd_capital_social_pj " +
+                    "pes.bd_id_end" +
+                    "pes.bd_num_end_pes" +
+                    "pes.bd_complemento_end_pes" + 
+                    "pes.bd_fone_pes" +
+                    "pes.bd_cliente_desde_pes" +
+                    "pes.bd_status_pes, " +                    
+            "From t_pessoa_juridica pj " +
+            "Join t_pessoa pes on pes.bd_id_pes = pj.bd_id_pj;");
 
         if (condicao != null && !condicao.trim().isEmpty()) {
             sql.append(" Where ").append(condicao);
@@ -81,14 +88,18 @@ public class Pessoa_juridica_controller implements iPessoa_juridicaDAO {
             dados = command.executeQuery();
 
             while (dados.next()) {
-                Pessoa_juridica pj = new Pessoa_juridica();
-                pj.setPessoa_id(dados.getLong(1));
-                pj.setPj_cnpj(dados.getString(2));
-                pj.setPj_razao_social(dados.getString(3));
-                pj.setNome_fantasia(dados.getString(4));
-                pj.setPj_data_abertura(dados.getDate(5));
-                pj.setPj_capital_social(dados.getDouble(6));
-                lista.add(pj);
+                lista.add(new Pessoa_juridica(  dados.getLong(1),
+                                                dados.getString(2),
+                                                dados.getString(3),
+                                                dados.getString(4),
+                                                dados.getDate(5),
+                                                dados.getDouble(6),
+                                                dados.getLong(7),
+                                                dados.getInt(8),
+                                                dados.getString(9),
+                                                dados.getString(10),
+                                                dados.getDate(11),
+                                                dados.getBoolean(12)));
             }
         } catch (SQLException e) {
             throw new RuntimeException("Problema no retorno dos dados:\n" + e.getMessage());
