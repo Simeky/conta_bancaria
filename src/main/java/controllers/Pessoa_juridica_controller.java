@@ -244,13 +244,51 @@ public class Pessoa_juridica_controller implements iPessoa_juridicaDAO {
 
     @Override
     public Pessoa_juridica find_pessoa_juridica(String cnpj) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'find_pessoa_juridica'");
+        StringBuilder sql = new StringBuilder(
+            "Select  pj.bd_id_pj, " +
+                    "pj.bd_cnpj_pj, " +
+                    "pj.bd_razao_social_pj, " +
+                    "pj.bd_nome_fantasia_pj, " +
+                    "pj.bd_abertura_pj, " +
+                    "pj.bd_capital_social_pj, " +
+                    "pes.bd_id_end, " +
+                    "pes.bd_num_end_pes, " +
+                    "pes.bd_complemento_end_pes, " +
+                    "pes.bd_fone_pes, " +
+                    "pes.bd_cliente_desde_pes, " +
+                    "pes.bd_status_pes " +
+            "From t_pessoa_juridica pj " +
+            "Join t_pessoa pes on pes.bd_id_pes = pj.bd_id_pj " +
+            "Where pj.bd_cnpj_pj = ?;");
+
+        Connection conexao = MySQL.conectar();
+        PreparedStatement command = null;
+        ResultSet dados = null;
+        Pessoa_juridica pj = null;
+        try {
+            command = conexao.prepareStatement(sql.toString());
+            command.setString(1, cnpj);
+            dados = command.executeQuery();
+            if (dados.next()) {
+                pj = new Pessoa_juridica(dados.getLong(1),
+                                         dados.getString(2),
+                                         dados.getString(3),
+                                         dados.getString(4),
+                                         dados.getDate(5),
+                                         dados.getDouble(6),
+                            new Endereco(dados.getLong(7), null, null, null, null, null),
+                                         dados.getInt(8),
+                                         dados.getString(9),
+                                         dados.getString(10),
+                                         dados.getDate(11),
+                                         dados.getBoolean(12));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Problema no retorno dos dados:\n" + e.getMessage());
+        } finally {
+            MySQL.desconectar(conexao, command);
+        }
+        return pj;
     }
 
-    @Override
-    public void desativar(Pessoa_juridica pj) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
-    }
 }

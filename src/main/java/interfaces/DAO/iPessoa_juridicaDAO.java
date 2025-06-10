@@ -13,6 +13,5 @@ public interface iPessoa_juridicaDAO {
     void update(Pessoa_juridica pj);
     void save(Pessoa_juridica pj);
     void desativar(long id);
-    void desativar(Pessoa_juridica pj);
 
 }
