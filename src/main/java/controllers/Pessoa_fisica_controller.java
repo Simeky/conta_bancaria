@@ -238,9 +238,63 @@ public class Pessoa_fisica_controller  implements iPessoa_fisicaDAO{
 
     @Override
     public void update(Pessoa_fisica pf) {
+        StringBuilder sqlPessoa = new StringBuilder(
+            "Update t_pessoa set bd_id_end = ?, " +
+                                "bd_num_end_pes = ?, " +
+                                "bd_complemento_end_pes = ?, " +
+                                "bd_fone_pes = ?, " +
+                                "bd_cliente_desde_pes = ?, " +
+                                "bd_status_pes = ? " +
+            "Where bd_id_pes = ?;");
         
-        
+        StringBuilder sqlPF = new StringBuilder(
+            "Update t_pessoa_fisica set bd_cpf_pf = ?, " +
+                                        "bd_nome_registro_pf = ?, " +
+                                        "bd_nome_social_pf = ?, " +
+                                        "bd_nascimento_pf = ?, " +
+                                        "bd_sexo_pf = ?, " +
+                                        "bd_renda_mensal_pf = ? " +
+            "Where bd_id_pf = ?;");
 
+        Connection conexao = MySQL.conectar();
+        PreparedStatement commandPessoa = null;
+        PreparedStatement commandPF = null;
+
+        try {
+            // Atualiza na t_pessoa
+            commandPessoa = conexao.prepareStatement(sqlPessoa.toString());
+            commandPessoa.setLong(1, pf.getPessoa_end().getEnd_id());
+            commandPessoa.setInt(2, pf.getPessoa_num_end());
+            commandPessoa.setString(3, pf.getPessoa_compl());
+            commandPessoa.setString(4, pf.getPessoa_fone());
+            commandPessoa.setDate(5, pf.getPessoa_cliente_desde());
+            commandPessoa.setBoolean(6, pf.getPessoa_status());
+            commandPessoa.setLong(7, pf.getPessoa_id());
+
+            if (commandPessoa.executeUpdate() == 0) {
+                throw new RuntimeException("Nenhum registro foi atualizado em t_pessoa. Verifique se o ID existe.");
+            }
+
+            // Atualiza na t_pessoa_fisica
+            commandPF = conexao.prepareStatement(sqlPF.toString());
+            commandPF.setString(1, pf.getPf_cpf());
+            commandPF.setString(2, pf.getPf_nome_registro());
+            commandPF.setString(3, pf.getPf_nome_social());
+            commandPF.setDate(4, pf.getPf_data_nasc());
+            commandPF.setString(5, pf.getPf_sexo().getValue());
+            commandPF.setDouble(6, pf.getPf_renda_mes());
+            commandPF.setLong(7, pf.getPessoa_id());
+
+            if (commandPF.executeUpdate() == 0) {
+                throw new RuntimeException("Nenhum registro foi atualizado em t_pessoa_fisica. Verifique se o ID existe.");
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException("Problema na atualização dos dados:\n" + e.getMessage());
+        } finally {
+            MySQL.desconectar(null, commandPessoa);
+            MySQL.desconectar(conexao, commandPF);
+        }
     }
 
     @Override

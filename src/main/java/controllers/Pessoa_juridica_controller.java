@@ -175,27 +175,26 @@ public class Pessoa_juridica_controller implements iPessoa_juridicaDAO {
     @Override
     public void update(Pessoa_juridica pj) {
         StringBuilder sqlPessoa = new StringBuilder(
-                        "Update t_pessoa set bd_id_end = ?, " +
-                                            "bd_num_end_pes = ?, " +
-                                            "bd_complemento_end_pes = ?, " +
-                                            "bd_fone_pes = ?, " +
-                                            "bd_cliente_desde_pes = ?, " +
-                                            "bd_status_pes = ? " +
-                        "Where bd_id_pes = ?;");
+            "Update t_pessoa set bd_id_end = ?, " +
+                                "bd_num_end_pes = ?, " +
+                                "bd_complemento_end_pes = ?, " +
+                                "bd_fone_pes = ?, " +
+                                "bd_cliente_desde_pes = ?, " +
+                                "bd_status_pes = ? " +
+            "Where bd_id_pes = ?;");
 
         StringBuilder sqlPJ = new StringBuilder(
-                        "Update t_pessoa_juridica set bd_cnpj_pj = ?, " +
-                                                     "bd_razao_social_pj = ?, " +
-                                                     "bd_nome_fantasia_pj = ?, " +
-                                                     "bd_abertura_pj = ?, " +
-                                                     "bd_capital_social_pj = ? " +
-                        "Where bd_id_pj = ?;");
+            "Update t_pessoa_juridica set bd_cnpj_pj = ?, " +
+                                         "bd_razao_social_pj = ?, " +
+                                         "bd_nome_fantasia_pj = ?, " +
+                                         "bd_abertura_pj = ?, " +
+                                         "bd_capital_social_pj = ? " +
+            "Where bd_id_pj = ?;");
         Connection conexao = MySQL.conectar();
         PreparedStatement commandPessoa = null;
         PreparedStatement commandPJ = null;
         try {
-            // Atualiza t_pessoa
-            
+            // Atualiza t_pessoa            
             commandPessoa = conexao.prepareStatement(sqlPessoa.toString());
             commandPessoa.setLong(1, pj.getPessoa_end().getEnd_id());
             commandPessoa.setInt(2, pj.getPessoa_num_end());
@@ -208,8 +207,7 @@ public class Pessoa_juridica_controller implements iPessoa_juridicaDAO {
                 throw new RuntimeException("Nenhum registro foi atualizado em t_pessoa. Verifique se o ID existe.");
             }
 
-            // Atualiza t_pessoa_juridica
-           
+            // Atualiza t_pessoa_juridica           
             commandPJ = conexao.prepareStatement(sqlPJ.toString());
             commandPJ.setString(1, pj.getPj_cnpj());
             commandPJ.setString(2, pj.getPj_razao_social());
