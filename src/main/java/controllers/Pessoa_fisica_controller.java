@@ -238,8 +238,9 @@ public class Pessoa_fisica_controller  implements iPessoa_fisicaDAO{
 
     @Override
     public void update(Pessoa_fisica pf) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        
+        
+
     }
 
     @Override
