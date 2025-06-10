@@ -82,14 +82,12 @@ public class Endereco_controller implements iEnderecoDAO {
             dados = command.executeQuery();
 
             while (dados.next()) {
-                Endereco end = new Endereco();
-                end.setEnd_id(dados.getLong(1));
-                end.setEnd_cep(dados.getString(2));
-                end.setEnd_uf(dados.getString(3));
-                end.setEnd_municipio(dados.getString(4));
-                end.setEnd_bairro(dados.getString(5));
-                end.setEnd_logradouro(dados.getString(6));
-                lista.add(end);
+                lista.add(new Endereco( dados.getLong(1), 
+                                        dados.getString(2), 
+                                        dados.getString(3), 
+                                        dados.getString(4), 
+                                        dados.getString(5), 
+                                        dados.getString(6)));
             }
         } catch (SQLException e) {
             throw new RuntimeException("Problema no retorno dos dados:\n" + e.getMessage());
