@@ -133,7 +133,7 @@ public class Pessoa_juridica_controller implements iPessoa_juridicaDAO {
         Connection conexao = MySQL.conectar();
         PreparedStatement commandPessoa = null;
         PreparedStatement commandPJ = null;
-        //ResultSet generatedKeys = null;
+        ResultSet generatedKeys = null;
         try {
             // Insere na t_pessoa
             commandPessoa = conexao.prepareStatement(insert_pessoa.toString(), PreparedStatement.RETURN_GENERATED_KEYS);
@@ -146,12 +146,12 @@ public class Pessoa_juridica_controller implements iPessoa_juridicaDAO {
             if (commandPessoa.executeUpdate() == 0) {
                 throw new RuntimeException("Nenhum registro foi adicionado em t_pessoa. Verifique se não inseriu nenhum valor inválido");
             }
-            //generatedKeys = commandPessoa.getGeneratedKeys();
-            //if (generatedKeys.next()) {
-                //pj.setPessoa_id(generatedKeys.getLong(1));
-            //} else {
-                //throw new RuntimeException("Falha ao obter o ID gerado para t_pessoa.");
-            //}
+            generatedKeys = commandPessoa.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                pj.setPessoa_id(generatedKeys.getLong(1));
+            } else {
+                throw new RuntimeException("Falha ao obter o ID gerado para t_pessoa.");
+            }
             // Insere na t_pessoa_juridica
             commandPJ = conexao.prepareStatement(insert_pj.toString());
             commandPJ.setLong(1, pj.getPessoa_id());
@@ -168,7 +168,7 @@ public class Pessoa_juridica_controller implements iPessoa_juridicaDAO {
         } finally {
             MySQL.desconectar(null, commandPessoa);
             MySQL.desconectar(conexao, commandPJ);
-            //try { if (generatedKeys != null) generatedKeys.close(); } catch (Exception e) {}
+            try { if (generatedKeys != null) generatedKeys.close(); } catch (Exception e) {}
         }
     }
 
