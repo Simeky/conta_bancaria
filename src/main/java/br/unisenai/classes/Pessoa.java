@@ -15,8 +15,13 @@ public abstract class Pessoa {
     public Pessoa() {
     }
 
-    public Pessoa(long pessoa_id, Endereco pessoa_end, int pessoa_num_end, String pessoa_compl, String pessoa_fone,
-            Date pessoa_cliente_desde, Boolean pessoa_status) {
+    public Pessoa(  long pessoa_id, 
+                    Endereco pessoa_end, 
+                    int pessoa_num_end, 
+                    String pessoa_compl, 
+                    String pessoa_fone,
+                    Date pessoa_cliente_desde, 
+                    Boolean pessoa_status) {
         setPessoa_id(pessoa_id);
         setPessoa_end(pessoa_end);
         setPessoa_num_end(pessoa_num_end);
