@@ -2,6 +2,8 @@ package controllers;
 
 import br.unisenai.classes.Endereco;
 import br.unisenai.classes.Pessoa_juridica;
+import utilitarios.Utils;
+
 import java.sql.Date;
 import java.util.List;
 
@@ -81,7 +83,7 @@ public class Pessoa_juridica_controllerTest {
     public void testInsert() {
         Pessoa_juridica_controller controller = new Pessoa_juridica_controller();
         Pessoa_juridica pj = new Pessoa_juridica();
-        pj.setPessoa_end(new Endereco_controller().find_endereco(2));
+        pj.setPessoa_end(new Endereco_controller().find_endereco(1));
         pj.setPessoa_num_end(123);
         pj.setPessoa_compl("Sala Teste Insert");
         pj.setPessoa_fone("1234567890");
@@ -93,7 +95,10 @@ public class Pessoa_juridica_controllerTest {
         pj.setNome_fantasia("Nome Fantasia Teste Insert");
         pj.setPj_data_abertura(new Date(System.currentTimeMillis()));
         pj.setPj_capital_social(100000.00);
+
+        assertEquals(true, Utils.validar_cnpj(pj.getPj_cnpj()));
         controller.insert(pj);
+
 
         List<Pessoa_juridica> pjs = controller.find_all(null, null);
         boolean found = false;
@@ -117,19 +122,23 @@ public class Pessoa_juridica_controllerTest {
         pj.setPessoa_fone("9876543210");
         pj.setPessoa_cliente_desde(new Date(System.currentTimeMillis()));
         pj.setPessoa_status(true);
-        pj.setPj_cnpj("11.111.111/0001-11");
+        pj.setPj_cnpj("81.016.882/0001-85");
         pj.setPj_razao_social("Razão Social Save");
         pj.setNome_fantasia("Nome Fantasia Save");
         pj.setPj_data_abertura(new Date(System.currentTimeMillis()));
         pj.setPj_capital_social(200000.00);
+
+        assertEquals(true, Utils.validar_cnpj(pj.getPj_cnpj()));
         controller.save(pj);
 
         // Busca e atualiza
-        Pessoa_juridica found = controller.find_pessoa_juridica("11.111.111/0001-11");
+        Pessoa_juridica found = controller.find_pessoa_juridica("81.016.882/0001-85");
         assertNotNull(found);
         found.setNome_fantasia("Nome Fantasia Save Atualizada");
+
+        assertEquals(true, Utils.validar_cnpj(pj.getPj_cnpj()));
         controller.save(found);
-        Pessoa_juridica atualizado = controller.find_pessoa_juridica("11.111.111/0001-11");
+        Pessoa_juridica atualizado = controller.find_pessoa_juridica("81.016.882/0001-85");
         assertEquals("Nome Fantasia Save Atualizada", atualizado.getNome_fantasia());
     }
 
@@ -150,6 +159,8 @@ public class Pessoa_juridica_controllerTest {
         assertNotNull(pj);
 
         pj.setPj_cnpj("99.134.213/0001-73");
+
+        assertEquals(true, Utils.validar_cnpj(pj.getPj_cnpj()));
         controller.update(pj);
         Pessoa_juridica atualizado = controller.find_pessoa_juridica(pj.getPessoa_id());
         assertEquals("99.134.213/0001-73", atualizado.getPj_cnpj());
