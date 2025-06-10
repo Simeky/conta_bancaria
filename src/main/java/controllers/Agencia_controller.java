@@ -166,7 +166,7 @@ public class Agencia_controller implements iAgenciaDAO {
 
     @Override
     public void save(Agencia ag) {
-        if (ag.getAgencia_id() == 0)
+        if (find_agencia(ag.getAgencia_id()) == null)
             insert(ag);
         else
             update(ag);

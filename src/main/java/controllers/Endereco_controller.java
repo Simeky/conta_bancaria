@@ -157,7 +157,7 @@ public class Endereco_controller implements iEnderecoDAO {
 
     @Override
     public void save(Endereco end) {
-        if (end.getEnd_id() == 0)
+        if (find_endereco(end.getEnd_id()) == null)
             insert(end);
         else
             update(end);

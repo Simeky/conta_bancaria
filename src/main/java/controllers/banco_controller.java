@@ -185,7 +185,7 @@ public class Banco_controller implements iBancoDAO{
     @Override
     public void save(Banco ban) {
 
-        if (ban.getBanco_id() == 0) 
+        if (find_banco(ban.getBanco_id()) == null)
             insert(ban);
         else 
             update(ban);        
