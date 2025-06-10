@@ -34,10 +34,10 @@ public class Banco_controller implements iBancoDAO{
 
             if (dados.next()) {
                ban = new Banco();
-               ban.setBanco_id(dados.getLong(0));
-               ban.setBanco_cod_inst(dados.getString(1));
-               ban.setBanco_nome(dados.getString(2));
-               ban.setBanco_mascara_cb(dados.getString(3));
+               ban.setBanco_id(dados.getLong(1));
+               ban.setBanco_cod_inst(dados.getString(2));
+               ban.setBanco_nome(dados.getString(3));
+               ban.setBanco_mascara_cb(dados.getString(4));
             }
         }   
         catch (SQLException e) {
@@ -71,10 +71,10 @@ public class Banco_controller implements iBancoDAO{
 
             if (dados.next()) {
                ban = new Banco();
-               ban.setBanco_id(dados.getLong(0));
-               ban.setBanco_cod_inst(dados.getString(1));
-               ban.setBanco_nome(dados.getString(2));
-               ban.setBanco_mascara_cb(dados.getString(3));
+               ban.setBanco_id(dados.getLong(1));
+               ban.setBanco_cod_inst(dados.getString(2));
+               ban.setBanco_nome(dados.getString(3));
+               ban.setBanco_mascara_cb(dados.getString(4));
             }
         }   
         catch (SQLException e) {
@@ -115,10 +115,10 @@ public class Banco_controller implements iBancoDAO{
             dados = command.executeQuery();
 
             while (dados.next()) {
-               lista.add(new Banco( dados.getLong(0),
-                                    dados.getString(1),
+               lista.add(new Banco( dados.getLong(1),
                                     dados.getString(2),
-                                    dados.getString(3)));
+                                    dados.getString(3),
+                                    dados.getString(4)));
             }
         }   
         catch (SQLException e) {
