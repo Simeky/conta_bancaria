@@ -70,7 +70,7 @@ CREATE TABLE t_pessoa_fisica (
     bd_nome_registro_pf VARCHAR(100),
     bd_nome_social_pf VARCHAR(100),
     bd_nascimento_pf DATE,
-    bd_sexo_pf ENUM('Masculino cis', 'Feminino cis', 'Masculino trans', 'Feminino trans',  'Outro'),
+    bd_sexo_pf ENUM('MC', 'FC', 'MT', 'FT',  'O'),
     bd_renda_mensal_pf numeric(10,2),
     FOREIGN KEY (bd_id_pf) REFERENCES t_pessoa(bd_id_pes)
 );

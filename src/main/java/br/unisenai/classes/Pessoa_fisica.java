@@ -19,19 +19,20 @@ public class Pessoa_fisica extends Pessoa{
 
     }
 
-    public Pessoa_fisica(   long pessoa_id, 
-                            Endereco pessoa_end, 
-                            int Pessoa_num_end, 
-                            String pessoa_compl,
-                            String pessoa_fone,
-                            Date pessoa_cliente_desde,
-                            Boolean pessoa_status,
+    public Pessoa_fisica(   long pessoa_id,
                             String pf_cpf, 
                             String pf_nome_registro, 
                             String pf_nome_social, 
                             Date pf_data_nasc,
                             eSexo pf_sexo, 
-                            double pf_renda_mes) {        
+                            double pf_renda_mes,
+                            Endereco pessoa_end, 
+                            int Pessoa_num_end, 
+                            String pessoa_compl,
+                            String pessoa_fone,
+                            Date pessoa_cliente_desde,
+                            Boolean pessoa_status
+                            ) {        
         super(  pessoa_id, 
                 pessoa_end, 
                 Pessoa_num_end, 

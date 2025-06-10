@@ -2,11 +2,11 @@ package br.unisenai.enums;
 
 public enum eSexo {
 
-    mc("Masculino cis"),
-    fc("Feminino cis"),
-    mt("Masculino trans"),
-    ft("Feminino trans"),
-    o("Outro");
+    Masculino_cis("MC"),
+    Feminino_cis("FC"),
+    Masculino_trans("MT"),
+    Feminino_trans("FT"),
+    Outro("O");
 
     private final String valor_sexo;
 
