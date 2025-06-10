@@ -9,16 +9,13 @@ public class Banco_controllerTest {
     @Test
     public void testDelete() {
         Banco_controller controller = new Banco_controller();
-        Banco banco = new Banco();
-        banco.setBanco_cod_inst("88888");
-        banco.setBanco_nome("Banco Teste Delete");
-        banco.setBanco_mascara_cb("3333-3");
-        controller.insert(banco);
+
+        testInsert();
 
         List<Banco> bancos = controller.find_all(null, null);
         Banco ban = null;
         for (Banco b : bancos) {
-            if ("Banco Teste Delete".equals(b.getBanco_nome())) {
+            if ("Banco Teste Insert".equals(b.getBanco_nome())) {
                 ban = b;
                 break;
             }
@@ -112,25 +109,22 @@ public class Banco_controllerTest {
     @Test
     public void testUpdate() {
         Banco_controller controller = new Banco_controller();
-        Banco banco = new Banco();
-        banco.setBanco_cod_inst("99999");
-        banco.setBanco_nome("Banco Teste Update");
-        banco.setBanco_mascara_cb("2222-2");
-        controller.insert(banco);
+
+        testInsert();
 
         List<Banco> bancos = controller.find_all(null, null);
         Banco ban = null;
         for (Banco b : bancos) {
-            if ("Banco Teste Update".equals(b.getBanco_nome())) {
+            if ("Banco Teste Insert".equals(b.getBanco_nome())) {
                 ban = b;
                 break;
             }
         }
         assertNotNull(ban);
 
-        ban.setBanco_nome("Banco Atualizado");
+        ban.setBanco_nome("Banco Teste Update");
         controller.update(ban);
         Banco bAtualizado = controller.find_banco(ban.getBanco_id());
-        assertEquals("Banco Atualizado", bAtualizado.getBanco_nome());
+        assertEquals("Banco Teste Update", bAtualizado.getBanco_nome());
     }
 }
