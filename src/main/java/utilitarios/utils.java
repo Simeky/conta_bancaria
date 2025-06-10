@@ -66,4 +66,36 @@ public class Utils {
         
     }
 
+    public static boolean validar_cnpj(String cnpj) {
+        String cnpj_n_formatado = so_numeros(cnpj);
+
+        if (cnpj_n_formatado.length() != 14)
+            return false;
+
+        if (cnpj_n_formatado.chars().distinct().count() == 1)
+            return false;
+
+        int[] pesos1 = {5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
+        int[] pesos2 = {6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
+        int sm = 0, r;
+        char dig13, dig14;
+
+        // Calcula o 1º dígito verificador
+        for (int i = 0; i < 12; i++)
+            sm += (cnpj_n_formatado.charAt(i) - 48) * pesos1[i];
+
+        r = sm % 11;
+        dig13 = (r < 2) ? '0' : (char)((11 - r) + 48);
+
+        // Calcula o 2º dígito verificador
+        sm = 0;
+        for (int i = 0; i < 13; i++)
+            sm += (cnpj_n_formatado.charAt(i) - 48) * pesos2[i];
+
+        r = sm % 11;
+        dig14 = (r < 2) ? '0' : (char)((11 - r) + 48);
+
+        return (dig13 == cnpj_n_formatado.charAt(12)) && (dig14 == cnpj_n_formatado.charAt(13));
+    }
+
 }
