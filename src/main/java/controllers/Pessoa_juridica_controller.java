@@ -144,7 +144,7 @@ public class Pessoa_juridica_controller implements iPessoa_juridicaDAO {
             commandPessoa.setDate(5, pj.getPessoa_cliente_desde());
             commandPessoa.setBoolean(6, pj.getPessoa_status());
             if (commandPessoa.executeUpdate() == 0) {
-                throw new RuntimeException("Nenhum registro foi adicionado em t_pessoa. Verifique se não inseriu nenhum valor inválido");
+                throw new RuntimeException("Nenhum registro foi adicionado em t_pessoa. Verifique se não inseriu nenhum valor inválido.");
             }
             generatedKeys = commandPessoa.getGeneratedKeys();
             if (generatedKeys.next()) {
