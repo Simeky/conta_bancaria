@@ -145,8 +145,11 @@ public class Pessoa_fisica_controller  implements iPessoa_fisicaDAO{
 
     @Override
     public void save(Pessoa_fisica pf) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
+        if (find_pessoa_fisica(pf.getPessoa_id()) == null) {
+            insert(pf);
+        } else {
+            update(pf);
+        }
     }
 
     @Override
