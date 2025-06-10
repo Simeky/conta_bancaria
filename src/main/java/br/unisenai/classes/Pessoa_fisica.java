@@ -19,7 +19,7 @@ public class Pessoa_fisica extends Pessoa{
 
     }
 
-    public Pessoa_fisica(   long pesssoa_id, 
+    public Pessoa_fisica(   long pessoa_id, 
                             Endereco pessoa_end, 
                             int Pessoa_num_end, 
                             String pessoa_compl,
@@ -32,7 +32,19 @@ public class Pessoa_fisica extends Pessoa{
                             Date pf_data_nasc,
                             eSexo pf_sexo, 
                             double pf_renda_mes) {        
-        super();        
+        super(  pessoa_id, 
+                pessoa_end, 
+                Pessoa_num_end, 
+                pessoa_compl, 
+                pessoa_fone, 
+                pessoa_cliente_desde, 
+                pessoa_status);
+        setPf_cpf(pf_cpf);
+        setPf_nome_registro(pf_nome_registro);
+        setPf_nome_social(pf_nome_social);
+        setPf_data_nasc(pf_data_nasc);
+        setPf_sexo(pf_sexo);
+        setPf_renda_mes(pf_renda_mes);
     }
 
     //Getters 'n Setters    

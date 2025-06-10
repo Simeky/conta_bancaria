@@ -17,6 +17,12 @@ public class Endereco {
                     String end_municipio, 
                     String end_uf,
                     String end_cep) {
+        setEnd_id(end_id);
+        setEnd_logradouro(end_logradouro);
+        setEnd_bairro(end_bairro);
+        setEnd_municipio(end_municipio);
+        setEnd_uf(end_uf);
+        setEnd_cep(end_cep);
     }
     
     //Getters 'n Setters    

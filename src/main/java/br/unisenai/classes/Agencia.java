@@ -21,7 +21,13 @@ public class Agencia {
                     String agencia_compl, 
                     String agencia_fone, 
                     Boolean agencia_status) {
-
+        setAgencia_id(agencia_id);
+        setAgencia_banco(agencia_banco);
+        setAgencia_end(agencia_end);
+        setAgencia_num_end(agencia_num_end);
+        setAgencia_compl(agencia_compl);
+        setAgencia_fone(agencia_fone);
+        setAgencia_status(agencia_status);
     }
 
     //Getters 'n Setters

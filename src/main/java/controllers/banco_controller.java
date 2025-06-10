@@ -188,8 +188,7 @@ public class Banco_controller implements iBancoDAO{
         if (ban.getBanco_id() == 0) 
             insert(ban);
         else 
-            update(ban);
-        
+            update(ban);        
 
     }
 

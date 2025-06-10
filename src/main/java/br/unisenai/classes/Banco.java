@@ -10,10 +10,10 @@ public class Banco {
     public Banco(){}
 
     public Banco(long banco_id, String banco_cod_inst, String banco_nome, String banco_mascara_cb) {
-        this.banco_id = banco_id;
-        this.banco_cod_inst = banco_cod_inst;
-        this.banco_nome = banco_nome;
-        this.banco_mascara_cb = banco_mascara_cb;
+        setBanco_id(banco_id);
+        setBanco_cod_inst(banco_cod_inst);
+        setBanco_nome(banco_nome);
+        setBanco_mascara_cb(banco_mascara_cb);
     }
 
     //Getters 'n Setters

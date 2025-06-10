@@ -37,7 +37,18 @@ public abstract class Conta_bancaria {
                             Date cb_val_card,
                             short cb_cvv_card, 
                             eStatus cb_status) {
-
+        setCb_id(cb_id);
+        setCb_agencia(cb_agencia);
+        setCb_titular1(cb_titular1);
+        setCb_titular2(cb_titular2);
+        setCb_abertura(cb_abertura);
+        setCb_saldo(cb_saldo);
+        setCb_pswrd(cb_pswrd);
+        setCb_bandeira_card(cb_bandeira_card);
+        setCb_num_card(cb_num_card);
+        setCb_val_card(cb_val_card);
+        setCb_cvv_card(cb_cvv_card);
+        setCb_status(cb_status);
     }
 
     //Getters 'n Setters

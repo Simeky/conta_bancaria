@@ -17,17 +17,17 @@ public class Banco_controllerTest {
         controller.insert(banco);
 
         List<Banco> bancos = controller.find_all(null, null);
-        Banco bToDelete = null;
+        Banco ban = null;
         for (Banco b : bancos) {
             if ("Banco Teste Delete".equals(b.getBanco_nome())) {
-                bToDelete = b;
+                ban = b;
                 break;
             }
         }
-        assertNotNull(bToDelete);
+        assertNotNull(ban);
         
-        controller.delete(bToDelete.getBanco_id());
-        Banco bDeletado = controller.find_banco(bToDelete.getBanco_id());
+        controller.delete(ban.getBanco_id());
+        Banco bDeletado = controller.find_banco(ban.getBanco_id());
         assertNull(bDeletado);
     }
 
@@ -47,7 +47,6 @@ public class Banco_controllerTest {
     @Test
     public void testFind_banco() {
         Banco_controller controller = new Banco_controller();
-        // Supondo que exista um banco com ID 1
         Banco banco = controller.find_banco(1);
         assertNotNull(banco);
         assertEquals(1, banco.getBanco_id());
@@ -57,11 +56,11 @@ public class Banco_controllerTest {
     }
 
     @Test
-    public void testFind_banco2() {
+    public void testFind_banco_nome() {
         Banco_controller controller = new Banco_controller();
-        Banco banco = controller.find_banco("Banco Teste");
+        Banco banco = controller.find_banco("Banco Teste Insert");
         assertNotNull(banco);
-        assertEquals("Banco Teste", banco.getBanco_nome());
+        assertEquals("Banco Teste Insert", banco.getBanco_nome());
         assertNotNull(banco.getBanco_cod_inst());
         assertNotNull(banco.getBanco_mascara_cb());
     }
@@ -89,19 +88,26 @@ public class Banco_controllerTest {
     public void testSave() {
         Banco_controller controller = new Banco_controller();
         Banco banco = new Banco();
-        banco.setBanco_cod_inst("54321");
+        banco.setBanco_cod_inst("77777");
         banco.setBanco_nome("Banco Teste Save");
-        banco.setBanco_mascara_cb("1111-1");
+        banco.setBanco_mascara_cb("7777-7");
         controller.save(banco);
+
         List<Banco> bancos = controller.find_all(null, null);
-        boolean found = false;
+        Banco ban = null;
         for (Banco b : bancos) {
-            if ("Banco Teste Save".equals(b.getBanco_nome()) && "54321".equals(b.getBanco_cod_inst())) {
-                found = true;
+            if ("Banco Teste Save".equals(b.getBanco_nome())) {
+                ban = b;
                 break;
             }
         }
-        assertTrue(found);
+        assertNotNull(ban);
+
+        ban.setBanco_nome("Banco Save Atualizado");
+        controller.save(ban);
+
+        Banco bAtualizado = controller.find_banco(ban.getBanco_id());
+        assertEquals("Banco Save Atualizado", bAtualizado.getBanco_nome());
     }
 
     @Test
@@ -115,18 +121,18 @@ public class Banco_controllerTest {
         controller.insert(banco);
 
         List<Banco> bancos = controller.find_all(null, null);
-        Banco bToUpdate = null;
+        Banco ban = null;
         for (Banco b : bancos) {
             if ("Banco Teste Update".equals(b.getBanco_nome())) {
-                bToUpdate = b;
+                ban = b;
                 break;
             }
         }
-        assertNotNull(bToUpdate);
+        assertNotNull(ban);
 
-        bToUpdate.setBanco_nome("Banco Atualizado");
-        controller.update(bToUpdate);
-        Banco bAtualizado = controller.find_banco(bToUpdate.getBanco_id());
+        ban.setBanco_nome("Banco Atualizado");
+        controller.update(ban);
+        Banco bAtualizado = controller.find_banco(ban.getBanco_id());
         assertEquals("Banco Atualizado", bAtualizado.getBanco_nome());
     }
 }

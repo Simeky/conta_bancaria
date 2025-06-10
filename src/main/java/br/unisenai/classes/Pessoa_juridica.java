@@ -24,14 +24,19 @@ public class Pessoa_juridica extends Pessoa{
                             String nome_fantasia, 
                             Date pj_data_abertura,
                             double pj_capital_social,
-                            long pessoa_end, 
-                            int Pessoa_num_end, 
+                            Endereco pessoa_end, 
+                            int pessoa_num_end, 
                             String pessoa_compl,
                             String pessoa_fone,
                             Date pessoa_cliente_desde,
-                            boolean pessoa_status
+                            Boolean pessoa_status
                             ) {
-        super();
+        super(pessoa_id, pessoa_end, pessoa_num_end, pessoa_compl, pessoa_fone, pessoa_cliente_desde, pessoa_status);
+        setPj_cnpj(pj_cnpj);
+        setPj_razao_social(pj_razao_social);
+        setNome_fantasia(nome_fantasia);
+        setPj_data_abertura(pj_data_abertura);
+        setPj_capital_social(pj_capital_social);
     }
 
     public String getPj_cnpj() {
