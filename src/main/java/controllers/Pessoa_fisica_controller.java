@@ -29,9 +29,9 @@ public class Pessoa_fisica_controller  implements iPessoa_fisicaDAO{
                     "pes.bd_fone_pes, " +
                     "pes.bd_cliente_desde_pes, " +
                     "pes.bd_status_pes " +
-            "From t_pessoa_juridica pj " +
-            "Join t_pessoa pes on pes.bd_id_pes = pj.bd_id_pj " +
-            "Where pj.bd_id_pj = ?;");
+            "From t_pessoa_fisica pf " +
+            "Join t_pessoa pes on pes.bd_id_pes = pf.bd_id_pf " +
+            "Where pf.bd_id_pf = ?;");
 
         Connection conexao = MySQL.conectar();
         PreparedStatement command = null;
@@ -49,7 +49,7 @@ public class Pessoa_fisica_controller  implements iPessoa_fisicaDAO{
                                          dados.getString(3),
                                          dados.getString(4),
                                          dados.getDate(5),
-                                         eSexo.valueOf(dados.getString(6)),
+                           eSexo.valueOf(dados.getString(6)),
                                          dados.getDouble(7),
                             new Endereco(dados.getLong(8), null, null, null, null, null),
                                          dados.getInt(9),
@@ -70,7 +70,7 @@ public class Pessoa_fisica_controller  implements iPessoa_fisicaDAO{
     }
 
     @Override
-    public Pessoa_fisica find_pessoa_fisica(String t) {
+    public Pessoa_fisica find_pessoa_fisica(String cpf) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'find_pessoa_fisica'");
     }
