@@ -23,7 +23,7 @@ public class Agencia_controller implements iAgenciaDAO {
                     "ag.bd_complemento_end_age, " + 
                     "ag.bd_fone_age, " + 
                     "ag.bd_status_age " + 
-            "From t_agencia ag + " + 
+            "From t_agencia ag " + 
             "Where ag.bd_id_age = ?;");
         Connection conexao = MySQL.conectar();
         PreparedStatement command = null;
