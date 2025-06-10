@@ -112,7 +112,6 @@ public class Banco_controllerTest {
     @Test
     public void testUpdate() {
         Banco_controller controller = new Banco_controller();
-        
         Banco banco = new Banco();
         banco.setBanco_cod_inst("99999");
         banco.setBanco_nome("Banco Teste Update");

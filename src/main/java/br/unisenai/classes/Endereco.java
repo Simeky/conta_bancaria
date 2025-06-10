@@ -12,11 +12,11 @@ public class Endereco {
     public Endereco() {}
 
     public Endereco(long end_id, 
-                    String end_logradouro, 
-                    String end_bairro, 
+                    String end_cep, 
+                    String end_uf, 
                     String end_municipio, 
-                    String end_uf,
-                    String end_cep) {
+                    String end_bairro,
+                    String end_logradouro) {
         setEnd_id(end_id);
         setEnd_logradouro(end_logradouro);
         setEnd_bairro(end_bairro);
