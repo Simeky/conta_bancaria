@@ -307,15 +307,26 @@ public class Pessoa_fisica_controller  implements iPessoa_fisicaDAO{
     }
 
     @Override
-    public void delete(long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
-    }
+    public void desativar(long id) {
+        StringBuilder sql = new StringBuilder(
+            "Update t_pessoa set bd_status_pes = false " +
+            "Where bd_id_pes = ?;");
 
-    @Override
-    public void delete(Pessoa_fisica pf) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        Connection conexao = MySQL.conectar();
+        PreparedStatement command = null;
+
+        try {
+            command = conexao.prepareStatement(sql.toString());
+            command.setLong(1, id);
+
+            if (command.executeUpdate() == 0) {
+                throw new RuntimeException("Nenhum registro foi desativado. Verifique se o ID existe.");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Problema na desativação dos dados:\n" + e.getMessage());
+        } finally {
+            MySQL.desconectar(conexao, command);
+        }
     }
 
 }

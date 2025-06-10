@@ -12,7 +12,6 @@ public interface iPessoa_fisicaDAO {
     void insert(Pessoa_fisica pf);
     void update(Pessoa_fisica pf);
     void save(Pessoa_fisica pf);
-    void delete(long id);
-    void delete(Pessoa_fisica pf);
+    void desativar(long id);
 
 }
