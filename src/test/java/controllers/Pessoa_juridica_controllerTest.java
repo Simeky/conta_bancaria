@@ -87,13 +87,13 @@ public class Pessoa_juridica_controllerTest {
         pj.setPessoa_num_end(123);
         pj.setPessoa_compl("Sala Teste Insert");
         pj.setPessoa_fone("1234567890");
-        pj.setPessoa_cliente_desde(new Date(System.currentTimeMillis()));
+        pj.setPessoa_cliente_desde(Date.valueOf("1990-01-01"));
         pj.setPessoa_status(true);
         pj.setPessoa_id(pj.getPessoa_id());
         pj.setPj_cnpj("25.701.044/0001-70");
         pj.setPj_razao_social("Razão Social Teste Insert");
         pj.setNome_fantasia("Nome Fantasia Teste Insert");
-        pj.setPj_data_abertura(new Date(System.currentTimeMillis()));
+        pj.setPj_data_abertura(Date.valueOf("1800-01-01"));
         pj.setPj_capital_social(100000.00);
 
         assertEquals(true, Utils.validar_cnpj(pj.getPj_cnpj()));
