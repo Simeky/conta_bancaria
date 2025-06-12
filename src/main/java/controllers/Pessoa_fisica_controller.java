@@ -228,7 +228,7 @@ public class Pessoa_fisica_controller  implements iPessoa_fisicaDAO{
             }
 
         } catch (Exception e) {
-            throw new RuntimeException("Problema no retorno dos dados:\n" + e.getMessage());
+            throw new RuntimeException("Problema na inserção de um novo registro:\n" + e.getMessage());
         } finally {
             MySQL.desconectar(null , commandPessoa);
             MySQL.desconectar(conexao, commandPF);
