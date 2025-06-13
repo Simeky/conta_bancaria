@@ -44,8 +44,6 @@ public class Pessoa_fisica_controller  implements iPessoa_fisicaDAO{
             command.setLong(1, id);
             dados = command.executeQuery();
 
-            
-
             if (dados.next()) {
                 eSexo sexo = null;
                 for (eSexo s : eSexo.values()) {
