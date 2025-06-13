@@ -14,7 +14,7 @@ public class Pessoa_fisica_controllerTest {
     public void testDesativar() {
         Pessoa_fisica_controller controller = new Pessoa_fisica_controller();
         
-        testInsert(); // Garante que existe pelo menos uma pessoa física
+        testInsert();
  
         Pessoa_fisica pf = null;
         for (Pessoa_fisica p : controller.find_all(null, null)) {
