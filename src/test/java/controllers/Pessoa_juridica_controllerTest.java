@@ -41,6 +41,7 @@ public class Pessoa_juridica_controllerTest {
         assertNotNull(pjs);
         assertTrue(pjs.size() > 0);
         for (Pessoa_juridica pj : pjs) {
+            assertNotEquals(0, pj.getPessoa_id());
             assertNotNull(pj.getPj_cnpj());
             assertNotNull(pj.getPj_razao_social());
             assertNotNull(pj.getNome_fantasia());
@@ -51,8 +52,7 @@ public class Pessoa_juridica_controllerTest {
     @Test
     public void testFind_pessoa_juridica() {
         Pessoa_juridica_controller controller = new Pessoa_juridica_controller();
-        // Garante que existe pelo menos uma pessoa jurídica
-        testInsert();
+        
         List<Pessoa_juridica> pjs = controller.find_all(null, null);
         Pessoa_juridica pj = null;
         for (Pessoa_juridica p : pjs) {

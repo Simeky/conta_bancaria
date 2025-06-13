@@ -12,21 +12,71 @@ import utilitarios.Utils;
 public class Pessoa_fisica_controllerTest {
     @Test
     public void testDesativar() {
+        Pessoa_fisica_controller controller = new Pessoa_fisica_controller();
+        
+        testInsert(); // Garante que existe pelo menos uma pessoa física
+
+        List<Pessoa_fisica> pfs = controller.find_all(null, null);
+        Pessoa_fisica pf = null;
+        for (Pessoa_fisica p : pfs) {
+            if ("658.205.550-07".equals(p.getPf_cpf()) && p.getPessoa_status() == true) {
+                pf = p;
+                break;
+            }
+        }
+        assertNotNull(pf);
+
+        controller.desativar(pf.getPessoa_id());
+        Pessoa_fisica desativada = controller.find_pessoa_fisica(pf.getPessoa_id());
+        assertNotNull(desativada);
+        assertFalse(desativada.getPessoa_status());
 
     }
 
     @Test
     public void testFind_all() {
+        Pessoa_fisica_controller controller = new Pessoa_fisica_controller();
+        List<Pessoa_fisica> pfs = controller.find_all(null, null);
+        assertNotNull(pfs);
+        assertTrue(pfs.size() > 0);
 
+        for (Pessoa_fisica pf : pfs) {
+            assertNotEquals(0, pf.getPessoa_id());
+            assertNotNull(pf.getPf_cpf());
+            assertNotNull(pf.getPf_nome_registro());
+            assertNotNull(pf.getPf_nome_social());
+            assertNotNull(pf.getPessoa_end());
+            assertNotNull(pf.getPessoa_status());
+        }
     }
 
     @Test
     public void testFind_pessoa_fisica() {
+        Pessoa_fisica_controller controller = new Pessoa_fisica_controller();
+        
+        List<Pessoa_fisica> pfs = controller.find_all(null, null);
+        Pessoa_fisica pf = null;
+        for (Pessoa_fisica p : pfs) {
+            if ("658.205.550-07".equals(p.getPf_cpf())) {
+                pf = p;
+                break;
+            }
+        }
+        assertNotNull(pf);
+        assertEquals("658.205.550-07", pf.getPf_cpf());
+        assertNotEquals(0, pf.getPessoa_id());
+        assertNotNull(pf.getPessoa_end());
 
     }
 
     @Test
-    public void testFind_pessoa_fisica2() {
+    public void testFind_pessoa_fisica_cpf() {
+        Pessoa_fisica_controller controller = new Pessoa_fisica_controller();
+        Pessoa_fisica pf = controller.find_pessoa_fisica("658.205.550-07");
+        assertNotNull(pf);
+        assertEquals("658.205.550-07", pf.getPf_cpf());
+        assertNotEquals(0, pf.getPessoa_id());
+        assertNotNull(pf.getPessoa_end());
 
     }
 

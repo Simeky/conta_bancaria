@@ -23,7 +23,7 @@ public class Pessoa_fisica_controller  implements iPessoa_fisicaDAO{
                     "pf.bd_nome_social_pf, " +
                     "pf.bd_nascimento_pf, " +
                     "pf.bd_sexo_pf, " +
-                    "pf.bd_renda_mensal_pf" +
+                    "pf.bd_renda_mensal_pf, " +
                     "pes.bd_id_end, " +
                     "pes.bd_num_end_pes, " +
                     "pes.bd_complemento_end_pes, " +
@@ -44,7 +44,10 @@ public class Pessoa_fisica_controller  implements iPessoa_fisicaDAO{
             command.setLong(1, id);
             dados = command.executeQuery();
 
-            eSexo sexo = null;
+            
+
+            if (dados.next()) {
+                eSexo sexo = null;
                 for (eSexo s : eSexo.values()) {
                     if (s.getValue().equals(dados.getString(6))) {
                         sexo = s;
@@ -52,7 +55,6 @@ public class Pessoa_fisica_controller  implements iPessoa_fisicaDAO{
                     }
                 }
 
-            if (dados.next()) {
                 pf = new Pessoa_fisica(  dados.getLong(1),
                                          dados.getString(2),
                                          dados.getString(3),
@@ -65,8 +67,7 @@ public class Pessoa_fisica_controller  implements iPessoa_fisicaDAO{
                                          dados.getString(10),
                                          dados.getString(11),
                                          dados.getDate(12),
-                                         dados.getBoolean(13));
-                
+                                         dados.getBoolean(13));                
             }
         } catch (Exception e) {
             throw new RuntimeException("Problema no retorno dos dados:\n" + e.getMessage());
@@ -87,7 +88,7 @@ public class Pessoa_fisica_controller  implements iPessoa_fisicaDAO{
                     "pf.bd_nome_social_pf, " +
                     "pf.bd_nascimento_pf, " +
                     "pf.bd_sexo_pf, " +
-                    "pf.bd_renda_mensal_pf" +
+                    "pf.bd_renda_mensal_pf, " +
                     "pes.bd_id_end, " +
                     "pes.bd_num_end_pes, " +
                     "pes.bd_complemento_end_pes, " +
@@ -108,7 +109,8 @@ public class Pessoa_fisica_controller  implements iPessoa_fisicaDAO{
             command.setString(1, cpf);
             dados = command.executeQuery();
 
-            eSexo sexo = null;
+            if (dados.next()) {
+                eSexo sexo = null;
                 for (eSexo s : eSexo.values()) {
                     if (s.getValue().equals(dados.getString(6))) {
                         sexo = s;
@@ -116,7 +118,6 @@ public class Pessoa_fisica_controller  implements iPessoa_fisicaDAO{
                     }
                 }
 
-            if (dados.next()) {
                 pf = new Pessoa_fisica(  dados.getLong(1),
                                          dados.getString(2),
                                          dados.getString(3),
@@ -151,7 +152,7 @@ public class Pessoa_fisica_controller  implements iPessoa_fisicaDAO{
                     "pf.bd_nome_social_pf, " +
                     "pf.bd_nascimento_pf, " +
                     "pf.bd_sexo_pf, " +
-                    "pf.bd_renda_mensal_pf" +
+                    "pf.bd_renda_mensal_pf, " +
                     "pes.bd_id_end, " +
                     "pes.bd_num_end_pes, " +
                     "pes.bd_complemento_end_pes, " +
@@ -187,19 +188,19 @@ public class Pessoa_fisica_controller  implements iPessoa_fisicaDAO{
                     }
                 }
 
-                lista.add(new Pessoa_fisica(  dados.getLong(1),
-                                                       dados.getString(2),
-                                                       dados.getString(3),
-                                                       dados.getString(4),
-                                                       dados.getDate(5),
-                                                      (sexo),
-                                                       dados.getDouble(7),
-                                          new Endereco(dados.getLong(8), null, null, null, null, null),
-                                                       dados.getInt(9),
-                                                       dados.getString(10),
-                                                       dados.getString(11),
-                                                       dados.getDate(12),
-                                                       dados.getBoolean(13)));
+                lista.add(new Pessoa_fisica(dados.getLong(1),
+                                            dados.getString(2),
+                                            dados.getString(3),
+                                            dados.getString(4),
+                                            dados.getDate(5),
+                                           (sexo),
+                                            dados.getDouble(7),
+                               new Endereco(dados.getLong(8), null, null, null, null, null),
+                                            dados.getInt(9),
+                                            dados.getString(10),
+                                            dados.getString(11),
+                                            dados.getDate(12),
+                                            dados.getBoolean(13)));
             }
         } catch (Exception e) {
             throw new RuntimeException("Problema no retorno dos dados:\n" + e.getMessage());
