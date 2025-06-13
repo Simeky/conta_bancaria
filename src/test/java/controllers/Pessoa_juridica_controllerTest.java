@@ -1,6 +1,5 @@
 package controllers;
 
-import br.unisenai.classes.Endereco;
 import br.unisenai.classes.Pessoa_juridica;
 import utilitarios.Utils;
 
