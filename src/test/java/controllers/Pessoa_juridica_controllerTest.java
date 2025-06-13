@@ -45,6 +45,8 @@ public class Pessoa_juridica_controllerTest {
             assertNotNull(pj.getNome_fantasia());
             assertNotNull(pj.getPessoa_end());
         }
+        //System.out.println("Total de pessoas jurídicas encontradas: " + pjs.size());
+        //System.out.println(pjs.get(0).getPj_cnpj() + " - " + pjs.get(0).getPj_razao_social());
     }
 
     @Test
