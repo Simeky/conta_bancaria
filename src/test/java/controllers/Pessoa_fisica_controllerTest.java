@@ -115,6 +115,31 @@ public class Pessoa_fisica_controllerTest {
 
     @Test
     public void testSave() {
+        Pessoa_fisica_controller controller = new Pessoa_fisica_controller();
+        Pessoa_fisica pf = new Pessoa_fisica();
+        pf.setPessoa_end(new Endereco_controller().find_endereco(1));
+        pf.setPessoa_num_end(456);
+        pf.setPessoa_compl(null);
+        pf.setPessoa_fone("(11) 9876-5432");
+        pf.setPessoa_cliente_desde(Date.valueOf("2023-10-01"));
+        pf.setPessoa_status(true);
+        pf.setPessoa_id(pf.getPessoa_id());
+        pf.setPf_cpf("884.699.070-69");
+        pf.setPf_nome_registro("Marcelo Castro");
+        pf.setPf_nome_social("Marcinho");
+        pf.setPf_data_nasc(Date.valueOf("1990-01-01"));
+        pf.setPf_sexo(eSexo.Masculino_cis);
+        pf.setPf_renda_mes(1500.00);
+
+        assertEquals(true, Utils.validar_cpf(pf.getPf_cpf()));
+        controller.save(pf);
+
+        assertNotNull(controller.find_pessoa_fisica(pf.getPessoa_id()));
+        pf.setPf_nome_social("Marcia");
+        pf.setPf_sexo(eSexo.Feminino_trans);
+        controller.save(pf);
+        assertEquals("Marcia", controller.find_pessoa_fisica(pf.getPessoa_id()).getPf_nome_social());
+        
 
     }
 
