@@ -34,7 +34,9 @@ public class Endereco_controllerTest {
     public void testFind_all() {
         Endereco_controller controller = new Endereco_controller();
         List<Endereco> enderecos = controller.find_all(null, null);
+
         assertNotNull(enderecos);
+        
         for (Endereco endereco : enderecos) {
             assertNotEquals(0, endereco.getEnd_id());
             assertNotNull(endereco.getEnd_cep());
@@ -70,9 +72,8 @@ public class Endereco_controllerTest {
         endereco.setEnd_uf("UF");
         controller.insert(endereco);
 
-        List<Endereco> enderecos = controller.find_all(null, null);   
         boolean found = false;
-        for (Endereco e : enderecos) {
+        for (Endereco e : controller.find_all(null, null)) {
             if ("1234567-8".equals(e.getEnd_cep())){
                 found = true;
                 break;
@@ -92,9 +93,9 @@ public class Endereco_controllerTest {
         endereco.setEnd_uf("UF");
         controller.save(endereco);
 
-        List<Endereco> enderecos = controller.find_all(null, null);
+        
         Endereco end = null;
-        for (Endereco e : enderecos) {
+        for (Endereco e : controller.find_all(null, null)) {
             if ("55555555".equals(e.getEnd_cep())) {
                 end = e;
                 break;
@@ -104,8 +105,7 @@ public class Endereco_controllerTest {
 
         end.setEnd_logradouro("Rua Save Atualizada");
         controller.save(end);
-        Endereco atualizado = controller.find_endereco(end.getEnd_id());
-        assertEquals("Rua Save Atualizada", atualizado.getEnd_logradouro());
+        assertEquals("Rua Save Atualizada", controller.find_endereco(end.getEnd_id()).getEnd_logradouro());
     }
 
     @Test
@@ -114,9 +114,8 @@ public class Endereco_controllerTest {
         
         testInsert();
 
-        List<Endereco> enderecos = controller.find_all(null, null);
         Endereco end = null;
-        for (Endereco e : enderecos) {
+        for (Endereco e : controller.find_all(null, null)) {
             if (e.getEnd_cep().equals("1234567-8")) {
                 end = e;
                 break;
@@ -126,7 +125,6 @@ public class Endereco_controllerTest {
 
         end.setEnd_logradouro("Rua Update Atualizada");
         controller.update(end);
-        Endereco atualizado = controller.find_endereco(end.getEnd_id());
-        assertEquals("Rua Update Atualizada", atualizado.getEnd_logradouro());
+        assertEquals("Rua Update Atualizada", controller.find_endereco(end.getEnd_id()).getEnd_logradouro());
     }
 }
