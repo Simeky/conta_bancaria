@@ -15,10 +15,9 @@ public class Pessoa_fisica_controllerTest {
         Pessoa_fisica_controller controller = new Pessoa_fisica_controller();
         
         testInsert(); // Garante que existe pelo menos uma pessoa física
-
-        List<Pessoa_fisica> pfs = controller.find_all(null, null);
+ 
         Pessoa_fisica pf = null;
-        for (Pessoa_fisica p : pfs) {
+        for (Pessoa_fisica p : controller.find_all(null, null)) {
             if ("658.205.550-07".equals(p.getPf_cpf()) && p.getPessoa_status() == true) {
                 pf = p;
                 break;
@@ -54,9 +53,8 @@ public class Pessoa_fisica_controllerTest {
     public void testFind_pessoa_fisica() {
         Pessoa_fisica_controller controller = new Pessoa_fisica_controller();
         
-        List<Pessoa_fisica> pfs = controller.find_all(null, null);
         Pessoa_fisica pf = null;
-        for (Pessoa_fisica p : pfs) {
+        for (Pessoa_fisica p : controller.find_all(null, null)) {
             if ("658.205.550-07".equals(p.getPf_cpf())) {
                 pf = p;
                 break;
@@ -101,9 +99,8 @@ public class Pessoa_fisica_controllerTest {
         assertEquals(true, Utils.validar_cpf(pf.getPf_cpf()));
         controller.insert(pf);
 
-        List<Pessoa_fisica> pfs = controller.find_all(null, null);
         boolean found = false;
-        for (Pessoa_fisica p : pfs) {
+        for (Pessoa_fisica p : controller.find_all(null, null)) {
             if ("658.205.550-07".equals(p.getPf_cpf())) {
                 found = true;
                 break;
@@ -139,8 +136,6 @@ public class Pessoa_fisica_controllerTest {
         pf.setPf_sexo(eSexo.Feminino_trans);
         controller.save(pf);
         assertEquals("Marcia", controller.find_pessoa_fisica(pf.getPessoa_id()).getPf_nome_social());
-        
-
     }
 
     @Test
