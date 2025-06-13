@@ -140,7 +140,6 @@ public class Pessoa_fisica_controller  implements iPessoa_fisicaDAO{
         }
 
         return pf;
-
     }
 
     @Override
