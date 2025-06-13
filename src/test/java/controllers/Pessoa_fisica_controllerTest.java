@@ -140,6 +140,25 @@ public class Pessoa_fisica_controllerTest {
 
     @Test
     public void testUpdate() {
+        Pessoa_fisica_controller controller = new Pessoa_fisica_controller();
+        
+        testInsert();
+
+        Pessoa_fisica pf = null;
+        for (Pessoa_fisica p : controller.find_all(null, null)) {
+            if ("658.205.550-07".equals(p.getPf_cpf())) {
+                pf = p;
+                break;
+            }
+        }
+        assertNotNull(pf);
+        
+        pf.setPf_nome_social("Jefferson Atualizado");
+        controller.update(pf);
+        
+        Pessoa_fisica atualizado = controller.find_pessoa_fisica(pf.getPessoa_id());
+        assertNotNull(atualizado);
+        assertEquals("Jefferson Atualizado", atualizado.getPf_nome_social());
 
     }
 }
