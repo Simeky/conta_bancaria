@@ -3,6 +3,7 @@ package controllers;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.unisenai.classes.Agencia;
@@ -79,15 +80,73 @@ public class Conta_poupanca_controller implements iConta_poupancaDAO{
     }
 
     @Override
-    public Conta_poupanca find_conta_poupanca(String t) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'find_conta_poupanca'");
-    }
-
-    @Override
     public List<Conta_poupanca> find_all(String condicao, String ordem) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'find_all'");
+        StringBuilder sql = new StringBuilder(
+            "Select  cp.bd_id_cp, " +
+                    "cb.bd_id_age, " +
+                    "cb.bd_id_titular1_cb, " +
+                    "cb.bd_id_titular2_cb, " +
+                    "cb.bd_abertura_cb, " +
+                    "cb.bd_saldo_cb, " +
+                    "cb.bd_pswrd_cb, " +
+                    "cb.bd_bandeira_cartao_cb, " +
+                    "cb.bd_numero_cartao_cb, " +
+                    "cb.bd_validade_cartao_cb, " +
+                    "cb.bd_cvv_cb, " +
+                    "cb.bd_status_cb, " +
+                    "cp.bd_indice_reajuste_cp " +
+            "From conta_poupanca cp " +
+            "Join conta_bancaria cb on cp.bd_id_cp = cb.bd_id_cp ");
+
+        if (condicao != null && !condicao.isEmpty()) {
+            sql.append("Where ").append(condicao).append(" ");
+        }
+
+        if (ordem != null && !ordem.isEmpty()) {
+            sql.append("Order by ").append(ordem).append(" ");
+        }
+        sql.append(";");
+
+        Connection conexao = MySQL.conectar();
+        PreparedStatement command = null;
+        ResultSet dados = null;
+        List<Conta_poupanca> lista = new ArrayList<Conta_poupanca>();
+
+        try {
+            command = conexao.prepareStatement(sql.toString());
+            dados = command.executeQuery();
+
+            while (dados.next()) {
+                eStatus status = null;
+                for (eStatus s : eStatus.values()) {
+                    if (s.getValue() == dados.getInt(12)) {
+                        status = s;
+                        break;
+                    }
+                }
+
+                lista.add(new Conta_poupanca(dados.getLong(1), 
+                                            new Agencia(dados.getLong(2), null, null, 0, null, null, null), 
+                                            new Pessoa_fisica(dados.getLong(3), null, null, null, null, null, dados.getLong(1), null, 0, null, null, null, null), 
+                                            new Pessoa_fisica(dados.getLong(4), null, null, null, null, null, dados.getLong(1), null, 0, null, null, null, null), 
+                                            dados.getDate(5), 
+                                            dados.getDouble(6), 
+                                            dados.getString(7), 
+                                            dados.getString(8), 
+                                            dados.getString(9), 
+                                            dados.getDate(10), 
+                                            dados.getShort(11), 
+                                            status, 
+                                            dados.getDouble(13)));
+            }
+            
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao buscar contas poupança: " + e.getMessage());
+        } finally {
+            MySQL.desconectar(conexao, command);
+        }
+
+        return lista;        
     }
 
     @Override
