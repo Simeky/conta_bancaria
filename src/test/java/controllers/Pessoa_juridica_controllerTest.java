@@ -18,9 +18,8 @@ public class Pessoa_juridica_controllerTest {
         
         testInsert();
 
-        List<Pessoa_juridica> pjs = controller.find_all(null, null);
         Pessoa_juridica pj = null;
-        for (Pessoa_juridica p : pjs) {
+        for (Pessoa_juridica p : controller.find_all(null, null)) {
             if ("25.701.044/0001-70".equals(p.getPj_cnpj()) && p.getPessoa_status() == true) {
                 pj = p;
                 break;
@@ -53,9 +52,8 @@ public class Pessoa_juridica_controllerTest {
     public void testFind_pessoa_juridica() {
         Pessoa_juridica_controller controller = new Pessoa_juridica_controller();
         
-        List<Pessoa_juridica> pjs = controller.find_all(null, null);
         Pessoa_juridica pj = null;
-        for (Pessoa_juridica p : pjs) {
+        for (Pessoa_juridica p : controller.find_all(null, null)) {
             if ("25.701.044/0001-70".equals(p.getPj_cnpj())) {
                 pj = p;
                 break;
@@ -99,10 +97,8 @@ public class Pessoa_juridica_controllerTest {
         assertEquals(true, Utils.validar_cnpj(pj.getPj_cnpj()));
         controller.insert(pj);
 
-
-        List<Pessoa_juridica> pjs = controller.find_all(null, null);
         boolean found = false;
-        for (Pessoa_juridica p : pjs) {
+        for (Pessoa_juridica p : controller.find_all(null, null)) {
             if ("25.701.044/0001-70".equals(p.getPj_cnpj())) {
                 found = true;
                 break;
@@ -114,9 +110,8 @@ public class Pessoa_juridica_controllerTest {
     @Test
     public void testSave() {
         Pessoa_juridica_controller controller = new Pessoa_juridica_controller();
-        Endereco end = new Endereco_controller().find_endereco(2);
         Pessoa_juridica pj = new Pessoa_juridica();
-        pj.setPessoa_end(end);
+        pj.setPessoa_end(new Endereco_controller().find_endereco(1));
         pj.setPessoa_num_end(321);
         pj.setPessoa_compl("Sala Save");
         pj.setPessoa_fone("9876543210");
@@ -148,9 +143,8 @@ public class Pessoa_juridica_controllerTest {
 
         testInsert();
 
-        List<Pessoa_juridica> pjs = controller.find_all(null, null);
         Pessoa_juridica pj = null;
-        for (Pessoa_juridica p : pjs) {
+        for (Pessoa_juridica p : controller.find_all(null, null)) {
             if ("25.701.044/0001-70".equals(p.getPj_cnpj())) {
                 pj = p;
                 break;
@@ -162,7 +156,6 @@ public class Pessoa_juridica_controllerTest {
 
         assertEquals(true, Utils.validar_cnpj(pj.getPj_cnpj()));
         controller.update(pj);
-        Pessoa_juridica atualizado = controller.find_pessoa_juridica(pj.getPessoa_id());
-        assertEquals("99.134.213/0001-73", atualizado.getPj_cnpj());
+        assertEquals("99.134.213/0001-73", controller.find_pessoa_juridica(pj.getPessoa_id()).getPj_cnpj());
     }
 }
