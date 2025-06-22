@@ -10,6 +10,23 @@ import java.sql.Date;
 public class Conta_poupanca_controllerTest {
     @Test
     public void testCancela_id() {
+        Conta_poupanca_controller controller = new Conta_poupanca_controller();
+
+        testInsert();
+
+        Conta_poupanca cp = null;
+        for (Conta_poupanca c : controller.find_all(null, null)) {
+            if ("1234567890123456".equals(c.getCb_num_card()) && c.getCb_status() == eStatus.Ativa) {
+                cp = c;
+                break;
+            }
+        }
+        assertNotNull(cp);
+
+        controller.cancela(cp.getCb_id());
+        Conta_poupanca cancelada = controller.find_conta_poupanca(cp.getCb_id());
+        assertNotNull(cancelada);
+        assertEquals(eStatus.Cancelada, cancelada.getCb_status());
 
     }
 
