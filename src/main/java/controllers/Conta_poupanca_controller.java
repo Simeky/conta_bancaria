@@ -207,8 +207,56 @@ public class Conta_poupanca_controller implements iConta_poupancaDAO{
 
     @Override
     public void update(Conta_poupanca cp) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        StringBuilder sql = new StringBuilder(
+                "Update t_conta_bancaria set bd_id_age = ?, " +
+                                            "bd_id_titular1_cb = ?, " +
+                                            "bd_id_titular2_cb = ?, " +
+                                            "bd_abertura_cb = ?, " +
+                                            "bd_saldo_cb = ?, " +
+                                            "bd_senha_cb = ?, " +
+                                            "bd_bandeira_cartao_cb = ?, " +
+                                            "bd_numero_cartao_cb = ?, " +
+                                            "bd_validade_cartao_cb = ?, " +
+                                            "bd_cvv_cb = ?, " +
+                                            "bd_status_cb = ? " +
+                "Where bd_id_cb = ?;");
+        StringBuilder sql2 = new StringBuilder(
+                "Update t_conta_poupanca set bd_indice_reajuste_cp = ? where bd_id_cp = ?;");
+        Connection conexao = MySQL.conectar();
+        PreparedStatement commandcb = null;
+        PreparedStatement commandcp = null;
+        try {
+            // Atualiza t_conta_bancaria            
+            commandcb = conexao.prepareStatement(sql.toString());
+            commandcb.setLong(1, cp.getCb_agencia().getAgencia_id());
+            commandcb.setLong(2, cp.getCb_titular1().getPessoa_id());
+            commandcb.setLong(3, cp.getCb_titular2().getPessoa_id());
+            commandcb.setDate(4, cp.getCb_abertura());
+            commandcb.setDouble(5, cp.getCb_saldo());
+            commandcb.setString(6, cp.getCb_pswrd());
+            commandcb.setString(7, cp.getCb_bandeira_card());
+            commandcb.setString(8, cp.getCb_num_card());
+            commandcb.setDate(9, cp.getCb_val_card());
+            commandcb.setShort(10, cp.getCb_cvv_card());
+            commandcb.setInt(11, cp.getCb_status().getValue());
+            commandcb.setLong(12, cp.getCb_id());
+            if (commandcb.executeUpdate() == 0) {
+                throw new RuntimeException("Nenhum registro foi atualizado em t_conta_bancaria. Verifique se o ID existe.");
+            }
+
+            // Atualiza t_conta_poupanca
+            commandcp = conexao.prepareStatement(sql2.toString());
+            commandcp.setDouble(1, cp.getCp_reajuste());
+            commandcp.setLong(2, cp.getCb_id());
+            if (commandcp.executeUpdate() == 0) {
+                throw new RuntimeException("Nenhum registro foi atualizado em t_conta_poupanca. Verifique se o ID existe.");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao atualizar conta poupança: " + e.getMessage());
+        } finally {
+            MySQL.desconectar(null, commandcb);
+            MySQL.desconectar(conexao, commandcp);
+        }
     }
 
     @Override
