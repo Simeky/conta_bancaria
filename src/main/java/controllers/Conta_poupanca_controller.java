@@ -151,8 +151,58 @@ public class Conta_poupanca_controller implements iConta_poupancaDAO{
 
     @Override
     public void insert(Conta_poupanca cp) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'insert'");
+        StringBuilder sql = new StringBuilder(
+            "Insert into t_conta_bancaria values (bd_id_age, bd_id_titular1_cb, bd_id_titular2_cb, bd_abertura_cb, bd_saldo_cb, bd_senha_cb, bd_bandeira_cartao_cb, bd_numero_cartao_cb, bd_validade_cartao_cb, bd_cvv_cb, bd_status_cb);");
+        StringBuilder sql2 = new StringBuilder(
+            "Insert into t_conta_poupanca values (bd_id_cp, bd_indice_reajuste_cp);");
+        Connection conexao = MySQL.conectar();
+        PreparedStatement commandcb = null;
+        PreparedStatement commandcp = null;
+        ResultSet generatedKeys = null;
+
+        try {
+            //Insere na tabela conta_bancaria
+            commandcb = conexao.prepareStatement(sql.toString(), PreparedStatement.RETURN_GENERATED_KEYS);
+            commandcb.setLong(1, cp.getCb_agencia().getAgencia_id());
+            commandcb.setLong(2, cp.getCb_titular1().getPessoa_id());
+            commandcb.setLong(3, cp.getCb_titular2().getPessoa_id());
+            commandcb.setDate(4, cp.getCb_abertura());
+            commandcb.setDouble(5, cp.getCb_saldo());
+            commandcb.setString(6, cp.getCb_pswrd());
+            commandcb.setString(7, cp.getCb_bandeira_card());
+            commandcb.setString(8, cp.getCb_num_card());
+            commandcb.setDate(9, cp.getCb_val_card());
+            commandcb.setShort(10, cp.getCb_cvv_card());
+            commandcb.setInt(11, cp.getCb_status().getValue());
+
+            if (commandcb.executeUpdate() == 0) {
+                throw new RuntimeException("Nenhum registro foi adicionado em t_conta_bancaria. Verifique se não inseriu nenhum valor inválido.");
+            }
+
+            generatedKeys = commandcb.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                cp.setCb_id(generatedKeys.getLong(1));
+            }
+            else {
+                throw new RuntimeException("Nenhum ID foi gerado para a conta bancária. Verifique se não inseriu nenhum valor inválido.");
+            }
+
+            //Insere na tabela conta_poupanca
+            commandcp = conexao.prepareStatement(sql2.toString());
+            commandcp.setLong(1, cp.getCb_id());
+            commandcp.setDouble(2, cp.getCp_reajuste());
+            if (commandcp.executeUpdate() == 0) {
+                throw new RuntimeException("Nenhum registro foi adicionado em t_conta_poupanca. Verifique se não inseriu nenhum valor inválido.");
+            }
+        } 
+        catch (Exception e) {
+            throw new RuntimeException("Erro ao inserir conta poupança: " + e.getMessage());
+        }
+        finally {
+            MySQL.desconectar(null, commandcb);
+            MySQL.desconectar(conexao, commandcp);
+            try { if (generatedKeys != null) generatedKeys.close(); } catch (Exception e) {}
+        }
     }
 
     @Override
