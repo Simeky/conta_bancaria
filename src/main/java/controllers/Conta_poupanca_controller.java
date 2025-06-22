@@ -295,4 +295,31 @@ public class Conta_poupanca_controller implements iConta_poupancaDAO{
         desativa(cp.getCb_id());
     }
 
+    @Override
+    public void cancela(long id) {
+        StringBuilder sql = new StringBuilder(
+                "Update t_conta_bancaria set bd_status_cb = 0 where bd_id_cb = ?;");
+        Connection conexao = MySQL.conectar();
+        PreparedStatement command = null;
+
+        try {            
+            command = conexao.prepareStatement(sql.toString());
+            command.setLong(1, id);
+            if (command.executeUpdate() == 0) {
+                throw new RuntimeException("Nenhum registro foi canceladp. Verifique se o ID existe.");
+            }
+        } 
+        catch (Exception e) {
+            throw new RuntimeException("Erro ao cancelar conta poupança: " + e.getMessage());
+        } 
+        finally {
+            MySQL.desconectar(conexao, command);
+        }
+    }
+
+    @Override
+    public void cancela(Conta_poupanca cp) {
+        cancela(cp.getCb_id());
+    }
+
 }

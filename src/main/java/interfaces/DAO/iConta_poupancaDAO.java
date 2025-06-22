@@ -13,5 +13,7 @@ public interface iConta_poupancaDAO {
     void save(Conta_poupanca cp);
     void desativa(long id);
     void desativa(Conta_poupanca cp);
+    void cancela(long id);
+    void cancela(Conta_poupanca cp);
 
 }
