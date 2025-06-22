@@ -270,14 +270,29 @@ public class Conta_poupanca_controller implements iConta_poupancaDAO{
 
     @Override
     public void desativa(long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'desativa'");
+        StringBuilder sql = new StringBuilder(
+                "Update t_conta_bancaria set bd_status_cb = 5 where bd_id_cb = ?;");
+        Connection conexao = MySQL.conectar();
+        PreparedStatement command = null;
+
+        try {            
+            command = conexao.prepareStatement(sql.toString());
+            command.setLong(1, id);
+            if (command.executeUpdate() == 0) {
+                throw new RuntimeException("Nenhum registro foi desativado. Verifique se o ID existe.");
+            }
+        } 
+        catch (Exception e) {
+            throw new RuntimeException("Erro ao desativar conta poupança: " + e.getMessage());
+        } 
+        finally {
+            MySQL.desconectar(conexao, command);
+        }
     }
 
     @Override
     public void desativa(Conta_poupanca cp) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'desativa'");
+        desativa(cp.getCb_id());
     }
 
 }
