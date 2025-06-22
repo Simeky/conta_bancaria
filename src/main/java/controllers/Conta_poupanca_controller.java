@@ -24,15 +24,15 @@ public class Conta_poupanca_controller implements iConta_poupancaDAO{
                     "cb.bd_id_titular2_cb, " +
                     "cb.bd_abertura_cb, " +
                     "cb.bd_saldo_cb, " +
-                    "cb.bd_pswrd_cb, " +
+                    "cb.bd_senha_cb, " +
                     "cb.bd_bandeira_cartao_cb, " +
                     "cb.bd_numero_cartao_cb, " +
                     "cb.bd_validade_cartao_cb, " +
                     "cb.bd_cvv_cb, " +
                     "cb.bd_status_cb, " +
                     "cp.bd_indice_reajuste_cp " +
-            "From conta_poupanca cp " +
-            "Join conta_bancaria cb on cp.bd_id_cp = cb.bd_id_cp " +
+            "From t_conta_poupanca cp " +
+            "Join t_conta_bancaria cb on cp.bd_id_cp = cb.bd_id_cp " +
             "Where cp.bd_id_cp = ?;");
         
         Connection conexao = MySQL.conectar();
@@ -48,7 +48,7 @@ public class Conta_poupanca_controller implements iConta_poupancaDAO{
             if (dados.next()) {
                 eStatus status = null;
                 for (eStatus s : eStatus.values()) {
-                    if (s.getValue() == dados.getInt(12)) {
+                    if (s.getValue() == dados.getString(12)) {
                         status = s;
                         break;
                     }
@@ -88,15 +88,15 @@ public class Conta_poupanca_controller implements iConta_poupancaDAO{
                     "cb.bd_id_titular2_cb, " +
                     "cb.bd_abertura_cb, " +
                     "cb.bd_saldo_cb, " +
-                    "cb.bd_pswrd_cb, " +
+                    "cb.bd_senha_cb, " +
                     "cb.bd_bandeira_cartao_cb, " +
                     "cb.bd_numero_cartao_cb, " +
                     "cb.bd_validade_cartao_cb, " +
                     "cb.bd_cvv_cb, " +
                     "cb.bd_status_cb, " +
                     "cp.bd_indice_reajuste_cp " +
-            "From conta_poupanca cp " +
-            "Join conta_bancaria cb on cp.bd_id_cp = cb.bd_id_cp ");
+            "From t_conta_poupanca cp " +
+            "Join t_conta_bancaria cb on cp.bd_id_cp = cb.bd_id_cb ");
 
         if (condicao != null && !condicao.isEmpty()) {
             sql.append("Where ").append(condicao).append(" ");
@@ -119,7 +119,7 @@ public class Conta_poupanca_controller implements iConta_poupancaDAO{
             while (dados.next()) {
                 eStatus status = null;
                 for (eStatus s : eStatus.values()) {
-                    if (s.getValue() == dados.getInt(12)) {
+                    if (s.getValue() == dados.getString(12)) {
                         status = s;
                         break;
                     }
@@ -152,9 +152,10 @@ public class Conta_poupanca_controller implements iConta_poupancaDAO{
     @Override
     public void insert(Conta_poupanca cp) {
         StringBuilder sql = new StringBuilder(
-            "Insert into t_conta_bancaria values (bd_id_age, bd_id_titular1_cb, bd_id_titular2_cb, bd_abertura_cb, bd_saldo_cb, bd_senha_cb, bd_bandeira_cartao_cb, bd_numero_cartao_cb, bd_validade_cartao_cb, bd_cvv_cb, bd_status_cb);");
+            "Insert into t_conta_bancaria (bd_id_age, bd_id_titular1_cb, bd_id_titular2_cb, bd_abertura_cb, bd_saldo_cb, bd_senha_cb, bd_bandeira_cartao_cb, bd_numero_cartao_cb, bd_validade_cartao_cb, bd_cvv_cb, bd_status_cb) " +  
+            "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
         StringBuilder sql2 = new StringBuilder(
-            "Insert into t_conta_poupanca values (bd_id_cp, bd_indice_reajuste_cp);");
+            "Insert into t_conta_poupanca values (?, ?);");
         Connection conexao = MySQL.conectar();
         PreparedStatement commandcb = null;
         PreparedStatement commandcp = null;
@@ -173,7 +174,7 @@ public class Conta_poupanca_controller implements iConta_poupancaDAO{
             commandcb.setString(8, cp.getCb_num_card());
             commandcb.setDate(9, cp.getCb_val_card());
             commandcb.setShort(10, cp.getCb_cvv_card());
-            commandcb.setInt(11, cp.getCb_status().getValue());
+            commandcb.setString(11, cp.getCb_status().getValue());
 
             if (commandcb.executeUpdate() == 0) {
                 throw new RuntimeException("Nenhum registro foi adicionado em t_conta_bancaria. Verifique se não inseriu nenhum valor inválido.");
@@ -238,7 +239,7 @@ public class Conta_poupanca_controller implements iConta_poupancaDAO{
             commandcb.setString(8, cp.getCb_num_card());
             commandcb.setDate(9, cp.getCb_val_card());
             commandcb.setShort(10, cp.getCb_cvv_card());
-            commandcb.setInt(11, cp.getCb_status().getValue());
+            commandcb.setString(11, cp.getCb_status().getValue());
             commandcb.setLong(12, cp.getCb_id());
             if (commandcb.executeUpdate() == 0) {
                 throw new RuntimeException("Nenhum registro foi atualizado em t_conta_bancaria. Verifique se o ID existe.");
