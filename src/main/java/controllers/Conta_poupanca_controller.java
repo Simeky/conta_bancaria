@@ -213,8 +213,11 @@ public class Conta_poupanca_controller implements iConta_poupancaDAO{
 
     @Override
     public void save(Conta_poupanca cp) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
+        if (find_conta_poupanca(cp.getCb_id()) == null) {
+            insert(cp);
+        } else {
+            update(cp);
+        }
     }
 
     @Override
