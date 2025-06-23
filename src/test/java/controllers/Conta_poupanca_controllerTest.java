@@ -1,6 +1,8 @@
 package controllers;
 
 import org.junit.Test;
+import org.mindrot.jbcrypt.BCrypt;
+
 import static org.junit.Assert.*;
 
 import br.unisenai.classes.Conta_poupanca;
@@ -121,6 +123,7 @@ public class Conta_poupanca_controllerTest {
         assertNotNull(cp);
         assertNotEquals(0, cp.getCb_id());
         assertNotNull(cp.getCb_agencia());
+        assertTrue(BCrypt.checkpw("1234", cp.getCb_pswrd()));
     }
 
     @Test
