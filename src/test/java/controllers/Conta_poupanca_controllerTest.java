@@ -5,8 +5,6 @@ import static org.junit.Assert.*;
 
 import br.unisenai.classes.Conta_poupanca;
 import br.unisenai.enums.eStatus;
-import junit.framework.Assert;
-
 import java.sql.Date;
 import java.util.List;
 
