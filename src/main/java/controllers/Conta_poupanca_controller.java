@@ -32,7 +32,7 @@ public class Conta_poupanca_controller implements iConta_poupancaDAO{
                     "cb.bd_status_cb, " +
                     "cp.bd_indice_reajuste_cp " +
             "From t_conta_poupanca cp " +
-            "Join t_conta_bancaria cb on cp.bd_id_cp = cb.bd_id_cp " +
+            "Join t_conta_bancaria cb on cp.bd_id_cp = cb.bd_id_cb " +
             "Where cp.bd_id_cp = ?;");
         
         Connection conexao = MySQL.conectar();
@@ -48,7 +48,7 @@ public class Conta_poupanca_controller implements iConta_poupancaDAO{
             if (dados.next()) {
                 eStatus status = null;
                 for (eStatus s : eStatus.values()) {
-                    if (s.getValue() == dados.getString(12)) {
+                    if (s.getValue().equals(dados.getString(12))) {
                         status = s;
                         break;
                     }
@@ -119,7 +119,7 @@ public class Conta_poupanca_controller implements iConta_poupancaDAO{
             while (dados.next()) {
                 eStatus status = null;
                 for (eStatus s : eStatus.values()) {
-                    if (s.getValue() == dados.getString(12)) {
+                    if (s.getValue().equals(dados.getString(12))) {
                         status = s;
                         break;
                     }
@@ -272,7 +272,7 @@ public class Conta_poupanca_controller implements iConta_poupancaDAO{
     @Override
     public void desativa(long id) {
         StringBuilder sql = new StringBuilder(
-                "Update t_conta_bancaria set bd_status_cb = 5 where bd_id_cb = ?;");
+                "Update t_conta_bancaria set bd_status_cb = '5' where bd_id_cb = ?;");
         Connection conexao = MySQL.conectar();
         PreparedStatement command = null;
 
@@ -299,7 +299,7 @@ public class Conta_poupanca_controller implements iConta_poupancaDAO{
     @Override
     public void cancela(long id) {
         StringBuilder sql = new StringBuilder(
-                "Update t_conta_bancaria set bd_status_cb = 0 where bd_id_cb = ?;");
+                "Update t_conta_bancaria set bd_status_cb = '0' where bd_id_cb = ?;");
         Connection conexao = MySQL.conectar();
         PreparedStatement command = null;
 
@@ -307,7 +307,7 @@ public class Conta_poupanca_controller implements iConta_poupancaDAO{
             command = conexao.prepareStatement(sql.toString());
             command.setLong(1, id);
             if (command.executeUpdate() == 0) {
-                throw new RuntimeException("Nenhum registro foi canceladp. Verifique se o ID existe.");
+                throw new RuntimeException("Nenhum registro foi cancelado. Verifique se o ID existe.");
             }
         } 
         catch (Exception e) {
