@@ -52,12 +52,44 @@ public class Conta_poupanca_controllerTest {
 
     @Test
     public void testDesativa_id() {
+        Conta_poupanca_controller controller = new Conta_poupanca_controller();
 
+        testInsert();
+
+        Conta_poupanca cp = null;
+        for (Conta_poupanca c : controller.find_all(null, null)) {
+            if ("1234567890123456".equals(c.getCb_num_card()) && c.getCb_status() == eStatus.Ativa) {
+                cp = c;
+                break;
+            }
+        }
+        assertNotNull(cp);
+
+        controller.desativa(cp.getCb_id());
+        Conta_poupanca desativada = controller.find_conta_poupanca(cp.getCb_id());
+        assertNotNull(desativada);
+        assertEquals(eStatus.Inativa, desativada.getCb_status());
     }
 
     @Test
     public void testDesativa_cb() {
+        Conta_poupanca_controller controller = new Conta_poupanca_controller();
 
+        testInsert();
+
+        Conta_poupanca cp = null;
+        for (Conta_poupanca c : controller.find_all(null, null)) {
+            if ("1234567890123456".equals(c.getCb_num_card()) && c.getCb_status() == eStatus.Ativa) {
+                cp = c;
+                break;
+            }
+        }
+        assertNotNull(cp);
+
+        controller.desativa(cp);
+        Conta_poupanca desativada = controller.find_conta_poupanca(cp.getCb_id());
+        assertNotNull(desativada);
+        assertEquals(eStatus.Inativa, desativada.getCb_status());
     }
 
     @Test
