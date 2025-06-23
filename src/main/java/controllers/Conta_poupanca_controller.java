@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import br.unisenai.classes.Agencia;
 import br.unisenai.classes.Conta_poupanca;
 import br.unisenai.classes.Pessoa_fisica;
@@ -162,6 +164,9 @@ public class Conta_poupanca_controller implements iConta_poupancaDAO{
         ResultSet generatedKeys = null;
 
         try {
+            String pswrd = cp.getCb_pswrd();
+            String hash = BCrypt.hashpw(pswrd, BCrypt.gensalt());
+
             //Insere na tabela conta_bancaria
             commandcb = conexao.prepareStatement(sql.toString(), PreparedStatement.RETURN_GENERATED_KEYS);
             commandcb.setLong(1, cp.getCb_agencia().getAgencia_id());
@@ -169,7 +174,7 @@ public class Conta_poupanca_controller implements iConta_poupancaDAO{
             commandcb.setLong(3, cp.getCb_titular2().getPessoa_id());
             commandcb.setDate(4, cp.getCb_abertura());
             commandcb.setDouble(5, cp.getCb_saldo());
-            commandcb.setString(6, cp.getCb_pswrd());
+            commandcb.setString(6, hash);
             commandcb.setString(7, cp.getCb_bandeira_card());
             commandcb.setString(8, cp.getCb_num_card());
             commandcb.setDate(9, cp.getCb_val_card());
@@ -227,6 +232,9 @@ public class Conta_poupanca_controller implements iConta_poupancaDAO{
         PreparedStatement commandcb = null;
         PreparedStatement commandcp = null;
         try {
+            String pswrd = cp.getCb_pswrd();
+            String hash = BCrypt.hashpw(pswrd, BCrypt.gensalt());
+
             // Atualiza t_conta_bancaria            
             commandcb = conexao.prepareStatement(sql.toString());
             commandcb.setLong(1, cp.getCb_agencia().getAgencia_id());
@@ -234,7 +242,7 @@ public class Conta_poupanca_controller implements iConta_poupancaDAO{
             commandcb.setLong(3, cp.getCb_titular2().getPessoa_id());
             commandcb.setDate(4, cp.getCb_abertura());
             commandcb.setDouble(5, cp.getCb_saldo());
-            commandcb.setString(6, cp.getCb_pswrd());
+            commandcb.setString(6, hash);
             commandcb.setString(7, cp.getCb_bandeira_card());
             commandcb.setString(8, cp.getCb_num_card());
             commandcb.setDate(9, cp.getCb_val_card());
