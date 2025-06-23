@@ -5,7 +5,10 @@ import static org.junit.Assert.*;
 
 import br.unisenai.classes.Conta_poupanca;
 import br.unisenai.enums.eStatus;
+import junit.framework.Assert;
+
 import java.sql.Date;
+import java.util.List;
 
 public class Conta_poupanca_controllerTest {
     @Test
@@ -94,12 +97,32 @@ public class Conta_poupanca_controllerTest {
 
     @Test
     public void testFind_all() {
+        Conta_poupanca_controller controller = new Conta_poupanca_controller();
+        List<Conta_poupanca> contas = controller.find_all(null, null);
+        assertNotNull(contas);
+        assertTrue(contas.size() > 0);
 
+        for (Conta_poupanca cp : contas) {
+            assertNotEquals(0, cp.getCb_id());
+            assertNotNull(cp.getCb_agencia());
+            assertNotNull(cp.getCb_titular1());
+        }
     }
 
     @Test
     public void testFind_conta_poupanca() {
+        Conta_poupanca_controller controller = new Conta_poupanca_controller();
+        Conta_poupanca cp = null;
 
+        for (Conta_poupanca c : controller.find_all(null, null)) {
+            if ("1234567890123456".equals(c.getCb_num_card())) {
+                cp = c;
+                break;
+            }
+        }
+        assertNotNull(cp);
+        assertNotEquals(0, cp.getCb_id());
+        assertNotNull(cp.getCb_agencia());
     }
 
     @Test
