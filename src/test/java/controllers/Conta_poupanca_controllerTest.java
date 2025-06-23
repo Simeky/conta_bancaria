@@ -183,6 +183,25 @@ public class Conta_poupanca_controllerTest {
 
     @Test
     public void testUpdate() {
+        Conta_poupanca_controller controller = new Conta_poupanca_controller();
+        Conta_poupanca cp = null;
 
+        testInsert();
+
+        for (Conta_poupanca c : controller.find_all(null, null)) {
+            if ("1234567890123456".equals(c.getCb_num_card())) {
+                cp = c;
+                break;
+            }
+        }
+        assertNotNull(cp);
+
+        cp.setCb_bandeira_card("Elo");
+        cp.setCp_reajuste(0.10);
+        controller.update(cp);
+
+        Conta_poupanca atualizado = controller.find_conta_poupanca(cp.getCb_id());
+        assertNotNull(atualizado);
+        assertEquals(0.10, atualizado.getCp_reajuste(), 0.001);
     }
 }
